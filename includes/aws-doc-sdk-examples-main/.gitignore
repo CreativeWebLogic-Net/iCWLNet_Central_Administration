@@ -1,0 +1,16 @@
+build_dir/
+target/
+*.swp
+.DS_Store
+.metadata
+.recommenders
+._*
+vendor/
+*.exe
+.idea
+venv
+.*~
+xcuserdata
+.swiftpm
+Package.resolved
+super-linter.log
