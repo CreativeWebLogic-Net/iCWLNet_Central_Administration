@@ -195,8 +195,7 @@ function YY_checkform() { //v4.71
                   Unlimited Email<br>
                   5 cPanel Accounts<br>
                   </div>
-                </div>
-                </p>            
+                </div>   
            
 				
 				</td>
