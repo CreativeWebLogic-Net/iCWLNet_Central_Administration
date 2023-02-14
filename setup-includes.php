@@ -13,7 +13,8 @@
 	$sidebar_data=array();
 	$news_data=array();
 	//----------------------------------static asset files------------------------------
-	$app_data['asset-severs'][0]='<?php print $app_data['asset-sever']; ?>/'; // linode server
+	$app_data['asset_server_number']=9;
+	$app_data['asset-severs'][0]='https://sitemanage.info/main/assets/'; // digital ocean custom server
 	$app_data['asset-severs'][1]='https://spaces.auseo.net/'; // digital ocean custom server
 	$app_data['asset-severs'][2]='https://static-cms.nyc3.cdn.digitaloceanspaces.com/'; // digital ocean cdn server
 	$app_data['asset-severs'][3]='https://static-cms.nyc3.digitaloceanspaces.com/'; //digital ocean standard server
@@ -22,8 +23,9 @@
 	$app_data['asset-severs'][6]='https://assets.icwl.me/'; //hostgator reseller server
 	$app_data['asset-severs'][7]='https://static-assets.w-d.biz/'; //cloud unlimited server
 	$app_data['asset-severs'][8]='https://assets.i-n.club/'; //ionos unlimited server
+	$app_data['asset-severs'][9]='https://assets.creativeweblogic.net'; //ionos unlimited server
 
-	$app_data['asset-sever']=$app_data['asset-severs'][0];
+	$app_data['asset-sever']=$app_data['asset-severs'][$app_data['asset_server_number']];
 	//----------------------------------------------------------------
 	//----------------------------------------------------------------
 	$app_data['languages']=array();

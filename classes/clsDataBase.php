@@ -1,6 +1,7 @@
 ﻿<?php
 	//-----------------------------------------------------------------------------------------------------------
 	
+
 	class clsDatabaseInterface{
 		var $SQL;
 		var $Table;
@@ -16,9 +17,9 @@
 		public $log="";
 		var $log_text="";
 		var $db_type_list=array("MySQL","Sqlite","pgSQL");
-		//var $current_db_type="MySQL";
+		var $current_db_type="MySQL";
 		//var $current_db_type="Sqlite";
-		var $current_db_type="pgSQL";
+		//var $current_db_type="pgSQL";
 		var $num_rows=0;
 	
 	
@@ -98,6 +99,7 @@
 				*/
 				
 				//echo"987654321-------------------|-".$this->current_db_type."-|----------------------------------------------------------\n\n";
+				
 				if($this->current_db_type=="MySQL"){
 					if(isset($this->links->connect_error)) {
 						$this->log->general("Connection failed: " . $this->links->connect_error,3);
@@ -119,6 +121,68 @@
 			//}
 			
 			
+		}
+
+		public function Initialise_Remote_Server($original=false){
+			
+			$this->m->Initialise_Remote_Server($original);
+			/*
+			if($original){
+				$this->current_server_tag=$this->original_server_tag;
+			}else{
+				$remote_server=array();
+				/*foreach($server_login as $server_key){
+					$remote_server[$server_key]=$server_login[$server_key];
+					$this->server_login[$server_key]=$remote_server[$server_key];
+					$this->current_server_tag=$server_key;
+				}*/
+				/*
+				$server_key=$server_login['server_tag'];
+				$remote_server[$server_key]=$server_login;
+				$this->server_login[$server_key]=$remote_server[$server_key];
+				$this->current_server_tag=$server_key;
+			}
+			*/
+			
+		}
+
+		//-----------------------------------------------------------------------------------------------------------
+		public function Set_Current_Server($Domain_Name){
+			//$this->links[$TArr]
+			$sql="SELECT username,password,dbname,Main_Url,ServerName,servers.Name AS server_desc,servers.id AS server_number FROM domains,servers,servers_databases WHERE domains.serversID=servers.id";
+			$sql=" AND servers.id=servers_databases.seeversID AND dommains.Name='".$Domain_Name."' LIMIT 0,1";
+			$this->rawQuery($sql);
+			$data=$this->Fetch_Array();
+			print_r($data);
+			/*
+			$this->$DBFile=$data["ServerName"];
+			$this->current_link=$this->$DBFile;
+			if(isset($this->server_login[$data["ServerName"]])){
+				$server_login[$this->$DBFile]=$this->server_login[$this->$DBFile];
+			}else{
+				$DB=array();
+				$DB['hostname']=$data["Main_Url"];
+				$DB['usernamedb']=$data["username"];
+				$DB['passworddb']=$data["password"];
+				$DB['dbName']=$data["dbname"];
+				$DB['server_tag']=$data["ServerName"];
+				$DB['server_desc']=$data["server_desc"];
+				$DB['server_number']=$data["server_number"];
+				$DB['current_dir']="./";
+				$DB['dbNames']=array();
+				$server_login[$DB['server_tag']]=array('server_tag'=>$DB['server_tag'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],'server_desc'=>$DB['server_desc'],'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],'hostname'=>$DB['hostname'],'dbName'=>$DB['dbName'],'dbNames'=>$DB['dbNames']);
+				$this->server_login[$DB['server_tag']]=$server_login[$DB['server_tag']];
+				
+			}
+			//-----------------------------------------------------------------------------------------------------------	
+			$this->m->Initialise_Remote_Server($server_login[$this->$DBFile]);
+			$this->links[$this->$DBFile] = $this->m->Connect($this->$DBFile);
+			if(isset($this->links->connect_error)) {
+				$this->log->general("Connection failed: " . $this->links->connect_error,3);
+			}else{
+				$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
+			}
+			*/
 		}
 		
 		function Reset(){
@@ -270,10 +334,13 @@
 			$row=array();
 			try{
 				if($this->current_db_type=="MySQL"){
+					
+					/*
 					$row = $this->result->fetch_array(MYSQLI_NUM);
 					if(!$this->NumRows()>0){
 						$row=array();	
 					}
+					*/
 				}elseif($this->current_db_type=="Sqlite"){
 					$row = $this->result->fetchArray();
 				}elseif($this->current_db_type=="pgSQL"){
@@ -1379,12 +1446,46 @@
 			pg_close($dbconn);
 			
 		}
+
+		private function get_login_details(){
+			include_once("classes/db.php");
+
+			$this->server_login=get_details();
+			print_r($this->current_server_tag=$this->server_login);
+			/*
+			$this->current_server_tag=$this->server_login[0]['server_tag'];
+			$this->server_desc=$this->server_login[0]['server_tag'];
+			*/
+		}
+
+		//-----------------------------------------------------------------------------------------------------------
+		//public function Initialise_Remote_Server($server_login=array(),$original=false){
+		public function Initialise_Remote_Server($original=false){
+			/*
+			if($original){
+				$this->current_server_tag=$this->original_server_tag;
+			}else{
+				$remote_server=array();
+				/*foreach($server_login as $server_key){
+					$remote_server[$server_key]=$server_login[$server_key];
+					$this->server_login[$server_key]=$remote_server[$server_key];
+					$this->current_server_tag=$server_key;
+				}*/
+				/*
+				$server_key=$server_login['server_tag'];
+				$remote_server[$server_key]=$server_login;
+				$this->server_login[$server_key]=$remote_server[$server_key];
+				$this->current_server_tag=$server_key;
+			}
+			*/
+			
+		}
 		
 		public function Connect($TArr="",$db_type="MySQL"){
 			
 			//$this->test_pgsql();
 			//exit("yy");
-			
+			$this->get_login_details();
 			
 			try{	
 				 //$db_ser_num=$this->Initialise_Current_Server();
@@ -1441,14 +1542,16 @@
 					return $this->links[$TArr];
 				}elseif($db_type=="pgSQL"){
 					//exit("--|-".$db_type."-|--\n\n");
-					
+					$db_login=$this->server_login[$TArr];
+					/*
 					$DB['server_tag']="db-pgSQL.php";
 					$this->current_server_tag=$DB['server_tag'];
 					$TArr=$this->current_server_tag;
-
-					$login_txt = "host=".$DB['hostname']." dbname=".$DB['dbName'];
-                    $login_txt.=" user=".$DB['usernamedb']." password=".$DB['passworddb'].";
-					$db = pg_connect($login_txt) die('Could not connect: ' . pg_last_error("db-errror"));
+					*/
+					$login_txt = "host=".$db_login['hostname']." dbname=".$db_login['dbName'];
+                    $login_txt.=" user=".$db_login['usernamedb']." password=".$db_login['passworddb'];
+					
+					$db = pg_connect($login_txt);// die('Could not connect: ' . pg_last_error("db-errror"));
 					$this->links[$TArr]=$db;
 					//echo"-210----------------------".$db_type."-------------------------------------";
 					

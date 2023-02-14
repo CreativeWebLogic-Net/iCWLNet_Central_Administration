@@ -2,8 +2,34 @@
 	ini_set( 'display_errors', '1' );
 	session_start();
 	
-	
-	
+	//----------------------------------------------------------------
+	// root data types
+	//----------------------------------------------------------------
+	$module_data=array();
+	$domain_user_data=array();
+	$domain_data=array();
+	$app_data=array();
+	$template_data=array();
+	$content_data=array();
+	$text_data=array();
+	$bizcat_data=array();
+	$sidebar_data=array();
+	$news_data=array();
+	$content_domain_data=array();
+	//--------------------------------------------------
+
+	$app_data['asset-severs'][0]='<?php print $app_data['asset-sever']; ?>/'; // linode server
+	$app_data['asset-severs'][1]='https://spaces.auseo.net/'; // digital ocean custom server
+	$app_data['asset-severs'][2]='https://static-cms.nyc3.cdn.digitaloceanspaces.com/'; // digital ocean cdn server
+	$app_data['asset-severs'][3]='https://static-cms.nyc3.digitaloceanspaces.com/'; //digital ocean standard server
+	$app_data['asset-severs'][4]='https://assets.ownpage.club/'; //asura standard server
+	$app_data['asset-severs'][5]='https://assets.hostingdiscount.club/'; //asura reseller server
+	$app_data['asset-severs'][6]='https://assets.icwl.me/'; //hostgator reseller server
+	$app_data['asset-severs'][7]='https://static-assets.w-d.biz/'; //cloud unlimited server
+	$app_data['asset-severs'][8]='https://assets.i-n.club/'; //ionos unlimited server
+	$app_data['asset-severs'][9]='https://assets.creativeweblogic.net'; //ionos unlimited server
+
+	$app_data['asset-sever']=$app_data['asset-severs'][9];
 	//----------------------------------------------------------------
 	// check if log in session valid
 	//----------------------------------------------------------------
@@ -304,5 +330,4 @@
 	if(isset($_SESSION["SU"])){
 		$app_data['SU']=$_SESSION["SU"];
 	}
-	
 ?>

@@ -1269,7 +1269,7 @@
 			
 		}
 		//-----------------------------------------------------------------------------------------------------------
-		private function Initialise_Remote_Server($server_login=array(),$original=false){
+		public function Initialise_Remote_Server($server_login=array(),$original=false){
 			if($original){
 				$this->current_server_tag=$this->original_server_tag;
 			}else{

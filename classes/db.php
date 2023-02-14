@@ -45,4 +45,9 @@
         ,'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],
         'hostname'=>$DB['hostname'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],
         'dbName'=>$DB['dbName'],'dbNames'=>$DB['dbNames']);
+
+    function get_details(){
+        global $server_login;
+        return $server_login;
+    }
 ?>

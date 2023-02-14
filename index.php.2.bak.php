@@ -1,6 +1,6 @@
 <?php
-	
-	//session_start();
+	/*
+	session_start();
 	
 	include("./Admin_Start_Include.php");
 	
@@ -72,7 +72,7 @@
 		}
 
 	}
-	
+	*/
 
 ?><html>
 <head>
