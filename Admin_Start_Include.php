@@ -1,8 +1,11 @@
 <?php	
 	ini_set( 'display_errors', '1' );
+	//echo"0003----------------------------||-------------------------------------------------\n\n";
+	
 	session_start();
 	
-	
+	//echo"000----------------------------||-------------------------------------------------\n\n";
+					
 	
 	//----------------------------------------------------------------
 	// check if log in session valid
@@ -35,7 +38,9 @@
 
 	include($include_dir."setup-includes.php");
 	include_once($include_dir."includes/functions.inc.php");
-	ob_start("callback");
+	//ob_start("callback");
+	
+	//echo"<br>00055----------------------------|".$_SESSION["administratorsID"]."|-------------------------------------------------\n\n";
 	
 	//-----------------------------------------------------------------------------------------------------------	
 	// Set app variables from drop down menu posting
@@ -56,7 +61,7 @@
 	
 	//print_r($_SESSION);
 	$app_data['LANGUAGESID']=$LanguagesID;
-	///echo"--44844-\n\n";
+	
 	if(isset($_POST['clientsID'])){
 		if($_POST['clientsID']){
 			
@@ -64,7 +69,7 @@
 			//
 			$_SESSION['original_languagesID']=false;
 			$_SESSION['original_domainsID']=false;
-			echo"--44845-\n\n".var_export($_SESSION,true)."--4484599-\n\n";
+			//echo"--44845-\n\n".var_export($_SESSION,true)."--4484599-\n\n";
 		}else{
 			if(!isset($_SESSION['original_clientsID'])){
 				$_SESSION['original_clientsID']=false;
@@ -95,6 +100,10 @@
 			}
 		}
 	}
+
+	//print_r($_SESSION);
+	//echo"--44844-\n\n";
+
 	$_SESSION['languagesID']=$_SESSION['original_languagesID'];
 
 	if(isset($_SESSION['languagesID'])) $app_data['original_vars']['languagesID']=$_SESSION['languagesID'];
@@ -108,16 +117,30 @@
 	// Set language
 	//-----------------------------------------------------------------------------------------------------------
 	try{
-		$r->Initialise_Remote_Server(true);
+		
+		//$r->Initialise_Remote_Server(true);
 		//$head_r=&$r;
 		$sql="SELECT id,Name FROM languages ORDER BY Name";
+		//$r->test_mysql($sql);
+		//print "\n\n 876501------|--".$sql."--|----|--\n<br>";
 		$rslt=$r->rawQuery($sql);
-		//print $sql;
-		$LanguageCount=$r->NumRows($rslt);
-		//for($x=0;$x<$LanguageCount;$x++){
-		while($data=$r->Fetch_Array()){
+		//$data=$r->Fetch_Array($rslt);
+		//print "\n\n 8765------|--".$sql."--|--".var_export($rslt,true)."--|-".var_export($data,true)."--|\n<br>";
+		//print "9900876----------|--".$sql."--|--\n<br>";
+
 		
+
+
+		//$r->test_mysql_db_result($rslt);
+		//print "99008765----------|--".var_export($rslt,true)."--|--\n<br>";
+		$LanguageCount=$r->NumRows($rslt);
+		//print "99008765----------|--".$LanguageCount."--|--\n<br>";
+		//for($x=0;$x<$LanguageCount;$x++){
+		while($data=$r->Fetch_Array($rslt)){
+			//print "8765----------|--".var_export($data,true)."--|--\n<br>";
+			//print_r($data);
 			//$data=$r->Fetch_Array();
+			//print "8765----------|--".var_export($data,true)."--|--\n<br>";
 			$LanguageName=$data[1];
 			if(!is_numeric($_SESSION['original_languagesID'])){
 				$_SESSION['original_languagesID']=$data[0];
@@ -132,23 +155,32 @@
 	}catch(Exception $e){
 		//print_r($e);
 	}
+	//print_r($app_data);
 	//-----------------------------------------------------------------------------------------------------------	
 	// Set domain
 	//-----------------------------------------------------------------------------------------------------------
 	try{
+		//echo"--4321-\n\n";
 		$r->Initialise_Remote_Server(true);
+		//echo"--43210-\n\n";
 		$domain_name="sitemanage.info";
 		$app_data['remote_server']=array();
 		$app_data['remote_server']['domain_name']=$domain_name;
+		//exit("languages3");
+		//echo"--1234---|-".var_export($_SESSION,true)."-|-\n\n";
 		if(isset($_SESSION['original_domainsID'])){
 			if(is_numeric($_SESSION['original_domainsID'])){
 				
 				//echo"--1234-\n\n";
 				$sql="SELECT domains.Name,ClientsID FROM domains WHERE domains.id='".$_SESSION['original_domainsID']."'";
-				//print "\n\n".$sql."\n\n";
+				
 				$rslt=$r->rawQuery($sql);
-				$data=$r->Fetch_Array();
-				if($r->NumRows()>0){
+				$data=$r->Fetch_Array($rslt);
+				//echo"--12345----|--".$sql."---|-".var_export($data,true)."-|---\n\n";
+				$num_rows=$r->NumRows($rslt);
+				//echo"--12345432100----|--".$num_rows."---|-".var_export($data,true)."-|---\n\n";
+				if($num_rows>0){
+					//echo"--123454321----|--".$sql."---|-".var_export($data,true)."-|---\n\n";
 					$domain_name=$data[0];
 					$app_data['remote_server']['domain_name']=$domain_name;
 					$domain_id=0;
@@ -218,12 +250,14 @@
 		}
 		$app_data['domains_populate']['search_sql']=$sql;
 		//-----------------------------------------------------------------------------------------------------------	
-		//echo"--3334-\n\n";
-		//print $sql;
+		
+		
 		
 		$rslt=$r->rawQuery($sql);
-		if($r->NumRows()>0){
-			while($data=$r->Fetch_Array()){
+		//print "\n\n -- 5554321--".$sql."----|--".var_export($app_data,true)."-|--\n\n";
+		if($r->NumRows($rslt)>0){
+			//print "\n\n -- 555--".$sql."\n\n";
+			while($data=$r->Fetch_Array($rslt)){
 				if(isset($_SESSION['original_domainsID'])){
 					if(!is_numeric($_SESSION['original_domainsID'])){
 						$_SESSION['original_domainsID']=$data[0];
@@ -238,6 +272,7 @@
 				$dval=$data[1]." -> ".$data[2];
 				$app_data['domains'][]=array($data[0]=>$dval);
 				//echo"<option value='$data[0]' $tmp>$data[1] -> $data[2]</option>";
+				//print "\n\n -- 5554321--".$sql."----|--".var_export($data,true)."-|--\n\n";
 			};
 			//echo"--14414-\n\n";
 		}
@@ -246,26 +281,34 @@
 	}catch(Exception $e){
 		//print_r($e);
 	}
-	
+	//print "\n\n -- 5552--".$sql."\n\n";
+	//print_r($app_data);
 	//-----------------------------------------------------------------------------------------------------------	
 	try{
+		//print "\n\n -- 5551234--".$sql."\n\n";
 		$r->Initialise_Remote_Server(true);
 		if($_SESSION["SU"]=="CWL"){ 
 			$sql="SELECT id,Name FROM clients ORDER BY Name";
 			
 			$rslt=$r->RawQuery($sql);
-			if($r->NumRows()>0){
-				while($data=$r->Fetch_Array()){
+			
+			$client_count=$r->NumRows($rslt);
+			//print "\n\n -- 555123456--".$client_count."\n\n";
+			if($client_count>0){
+				while($data=$r->Fetch_Array($rslt)){
 					//$tmp=($data[0]==$_SESSION['clientsID'] ? true : false);
 					//$app_data['clients'][]=array($data[0]=>$data[1],"selected"=>$tmp);
 					$app_data['clients'][]=array($data[0]=>$data[1]);
 					//echo"<option value='$data[0]' $tmp>$data[1]</option>";
 				};
 			}
+			//print "\n\n -- 1234555123456--n\n";
+			//print_r($app_data);
 		}
 	}catch(Exception $e){
 		//print_r($e);
 	}
+	
 	//--------------------------Set Global Administrators data---------------------------------------------------------------------------------	
 	$app_data['administrators']=array();
 	if(isset($_SESSION["administratorsID"])){
@@ -276,10 +319,15 @@
 			$app_data['administrators']=$dataarray;
 		}
 	}
+	//print "\n\n -- 55533--".$sql."\n\n";
 	
 
 	//-----------------------------------------------------------------------------------------------------------					
-	$domain_name=$app_data['remote_server']['domain_name'];
+	
+	
+	//exit();
+	//$domain_name=$app_data['remote_server']['domain_name'];
+	$domain_name="localhost";
 	$r->Set_Current_Server($domain_name);
 	//print "$$-".$domain_name."--\n";
 	//-----------------------------------------------------------------------------------------------------------	
@@ -304,5 +352,6 @@
 	if(isset($_SESSION["SU"])){
 		$app_data['SU']=$_SESSION["SU"];
 	}
-	
+	//print "\n\n -- 5554400--".var_export($_SESSION,true)."\n\n";
+	//print "\n\n -- 55544--".var_export($app_data,true)."\n\n";
 ?>

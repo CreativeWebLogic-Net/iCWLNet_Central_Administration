@@ -115,7 +115,7 @@ function YY_checkform() { //v4.71
     </table></td>
     <td valign="top" class="rightbg">
       <br />
-      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td>
 		  
@@ -130,70 +130,78 @@ function YY_checkform() { //v4.71
                 <td> <h2>Reseller WHM/CPanel Hosting Linux</h2>
                 
                 <div>
-                  <div style="float:left">
-                  ESSENTIAL<br>
+                  <div style="float:left;padding:20px">
+                  Essential CPanel Reseller<br>
                   <br>
                   Perfect to Start Reselling<br>
                   <br>
-                  3 Years @ $15.99 /mo<br>
-                  $22.79/mo<br>
-                  SAVE 30%<br>
+                  $15 /mo<br>
                   Unlimited Websites<br>
                   Free SSL Certificate<br>
-                  40 GB SSD Disk Space<br>
-                  800 GB Data Transfer<br>
-                  -<br>
+                  4 GB SSD Disk Space<br>
+                  8 GB Data Transfer<br>
+                  Free SSL Certificates<br>
+                  Unlimited Websites<br>
+                  Unlimited Databases<br>
                   Unlimited Email<br>
+                  Unlimited Mailing Lists<br>
+                  Unlimited Auto Responders<br>
                   5 cPanel Accounts<br>
                   </div>
 
-                  <div style="float:left">
-                  ADVANCE<br>
+                  <div style="float:left;padding:20px">
+                  Advance CPanel Reseller<br>
                   <br>
                   Best Value for Money<br>
                   <br>
-                  3 Years @ $18.99 /mo<br>
-                  $26.69/mo<br>
-                  SAVE 30%<br>
+                  $20 /mo<br>
                   Unlimited Websites<br>
                   Free SSL Certificate<br>
-                  50 GB SSD Disk Space<br>
-                  1000 GB Data Transfer<br>
-                  Free WHMCS<br>
+                  8 GB SSD Disk Space<br>
+                  16 GB Data Transfer<br>
+                  Free SSL Certificates<br>
+                  Unlimited Websites<br>
+                  Unlimited Databases<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Mailing Lists<br>
+                  Unlimited Auto Responders<br>
+                  10 cPanel Accounts<br>
                   </div>
-                  <div style="float:left">
-                  PRO<br>
+                  <div style="float:left;padding:20px">
+                  Pro CPanel Reseller<br>
                   <br>
                   More Resources to fuel your growth<br>
                   <br>
-                  3 Years @ $24.99 /mo<br>
-                  $33.99/mo<br>
-                  SAVE 25%<br>
+                  $25 /mo<br>
                   Unlimited Websites<br>
                   Free SSL Certificate<br>
-                  100 GB SSD Disk Space<br>
-                  2000 GB Data Transfer<br>
-                  Free WHMCS<br>
+                  16 GB SSD Disk Space<br>
+                  30 GB Data Transfer<br>
+                  Free SSL Certificates<br>
+                  Unlimited Websites<br>
+                  Unlimited Databases<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Mailing Lists<br>
+                  Unlimited Auto Responders<br>
+                  20 cPanel Accounts<br>
                   </div>
-                  <div style="float:left">
-                  ULTIMATE<br>
+                  <div style="float:left;padding:20px">
+                  Ultimate CPanel Reseller<br>
                   <br>
                   Become a Web Hosting Pro<br>
                   <br>
-                  3 Years @ $36.99 /mo<br>
-                  $49.49/mo<br>
-                  SAVE 25%<br>
+                  $30 /mo<br>
                   Unlimited Websites<br>
                   Free SSL Certificate<br>
-                  200 GB SSD Disk Space<br>
-                  3900 GB Data Transfer<br>
-                  Free WHMCS<br>
+                  30 GB SSD Disk Space<br>
+                  80 GB Data Transfer<br>
+                  Free SSL Certificates<br>
+                  Unlimited Websites<br>
+                  Unlimited Databases<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Mailing Lists<br>
+                  Unlimited Auto Responders<br>
+                  50 cPanel Accounts<br>
                   </div>
                 </div>           
            

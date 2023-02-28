@@ -1,8 +1,17 @@
 <?php
 	
 	//session_start();
+  //echo"0001----------------------------||-------------------------------------------------\n\n";
 	
-	include("./Admin_Start_Include.php");
+	$load_file="./Admin_Start_Include.php";
+  if(file_exists($load_file)){
+    //echo"23322332111----------------------------||-------------------------------------------------\n\n";
+	    include_once($load_file);
+  }else{
+    //echo"23322332----------------------------||-------------------------------------------------\n\n";
+  }
+  //echo"0002----------------------------||-------------------------------------------------\n\n";
+	
 	
 	$login=false;
 	
@@ -27,7 +36,7 @@
 	if($login){
 		$data=$r->rawQuery($sql);
 		$dataarray=$r->Fetch_Array($data);
-		print_r($dataarray);
+		//print_r($dataarray);
 		if(isset($dataarray[0])){
 			if($dataarray[0]>0){ //admin login ok
 				
@@ -47,11 +56,11 @@
 					$sql.=" AND administratorsID=$_SESSION[administratorsID] AND clientsID=$_SESSION[clientsID]";
 				}
 				
-				//print $sql;
+				print $sql;
 				$rslt=$r->RawQuery($sql);
 				if($rslt){
 					if($r->NumRows($rslt)>0){
-						$data=$r->Fetch_Array();
+						$data=$r->Fetch_Array($rslt);
 						if($data[0]>0){
 							$_SESSION['original_domainsID']=$data[0];
 							//$_SESSION['domainsID']=$data[0];

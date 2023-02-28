@@ -10,7 +10,8 @@
         
         if($r->NumRows()>0){
             //$domain_name=$data[1];
-            while($data=$r->Fetch_Assoc()){
+            while($data=$r->Fetch_Assoc($rslt)){
+              print_r($data);
                 $app_data['public_domains'][]=$data;
             }
         }
@@ -234,33 +235,35 @@ function YY_checkform() { //v4.71
                     <input name="Name" type="text" id="Name" size="45"> .
                     <select name="DomainsID" id="DomainsID">
                     <?php
-
-              if(count($app_data['public_domains'])>0){
-                //$Count=0;
-                $output="";
-               $drop_array=$app_data['public_domains'];
-                //print_r($drop_array);
-                foreach($drop_array as $key=>$val){
-                  //foreach($val as $key2=>$val2){
-                    
-                    $output.="\n<option value='".$val['domainsID']."'>".$val['Host']."</option>";
-                    /*
-                    //$tmp=($key2==$selected_key ? "selected" : "");
-                    //echo"<option value='".$key2."' ".$tmp.">".$val2."</option>";
-                    $output.='<tr class="'."\n";
-                    $op=(($Count%2)==0 ? "row1" : "row2");
-                    $output.=$op;
-                    $output.='"><td>'.$val2.'</td>'."\n";
-                    $output.='<td align="center"><a href="modify-edit.php?id='.$key2.'">'."\n";
-                    $output.='<img src="../../images/modify.gif" width="47" height="16" border="0"></a></td>'."\n";
-                    $output.='<td><div align="center"><input type="checkbox" name="DFiles[]" value="'.$key2.'">'."\n";
-                    $output.='</div></td></tr>'."\n";
-                    */
-                    //$Count++;
-                  //}
+              if(isset($app_data['public_domains'])){
+                if(count($app_data['public_domains'])>0){
+                  //$Count=0;
+                  $output="";
+                 $drop_array=$app_data['public_domains'];
+                  //print_r($drop_array);
+                  foreach($drop_array as $key=>$val){
+                    //foreach($val as $key2=>$val2){
+                      
+                      $output.="\n<option value='".$val['domainsID']."'>".$val['Host']."</option>";
+                      /*
+                      //$tmp=($key2==$selected_key ? "selected" : "");
+                      //echo"<option value='".$key2."' ".$tmp.">".$val2."</option>";
+                      $output.='<tr class="'."\n";
+                      $op=(($Count%2)==0 ? "row1" : "row2");
+                      $output.=$op;
+                      $output.='"><td>'.$val2.'</td>'."\n";
+                      $output.='<td align="center"><a href="modify-edit.php?id='.$key2.'">'."\n";
+                      $output.='<img src="../../images/modify.gif" width="47" height="16" border="0"></a></td>'."\n";
+                      $output.='<td><div align="center"><input type="checkbox" name="DFiles[]" value="'.$key2.'">'."\n";
+                      $output.='</div></td></tr>'."\n";
+                      */
+                      //$Count++;
+                    //}
+                  }
+                  print $output;
                 }
-                print $output;
               }
+              
               ?></select>
                 </td>
               </tr>

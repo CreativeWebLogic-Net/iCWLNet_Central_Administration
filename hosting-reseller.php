@@ -115,7 +115,7 @@ function YY_checkform() { //v4.71
     </table></td>
     <td valign="top" class="rightbg">
       <br />
-      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td>
 		  
@@ -130,70 +130,62 @@ function YY_checkform() { //v4.71
                 <td> <h2>Reseller Direct Admin Hosting Linux</h2>
                 
                 <div>
-                  <div style="float:left">
-                  ESSENTIAL<br>
+                  <div style="float:left;padding:20px">
+                  Essential DA Reseller<br>
                   <br>
                   Perfect to Start Reselling<br>
                   <br>
-                  3 Years @ $15.99 /mo<br>
-                  $22.79/mo<br>
-                  SAVE 30%<br>
+                  $10 /mo<br>
+                  3 GB SSD Disk Space<br>
+                  5 GB Data Transfer<br>
+                  Free SSL Certificates<br>
                   Unlimited Websites<br>
-                  Free SSL Certificate<br>
-                  40 GB SSD Disk Space<br>
-                  800 GB Data Transfer<br>
-                  -<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Databases<br>
+                  5 User Accounts<br>
                   </div>
 
-                  <div style="float:left">
-                  ADVANCE<br>
+                  <div style="float:left;padding:20px">
+                  Advance DA Reseller<br>
                   <br>
                   Best Value for Money<br>
                   <br>
-                  3 Years @ $18.99 /mo<br>
-                  $26.69/mo<br>
-                  SAVE 30%<br>
+                  $15 /mo<br>
+                  5 GB SSD Disk Space<br>
+                  10 GB Data Transfer<br>
+                  Free SSL Certificates<br>
                   Unlimited Websites<br>
-                  Free SSL Certificate<br>
-                  50 GB SSD Disk Space<br>
-                  1000 GB Data Transfer<br>
-                  Free WHMCS<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Databases<br>
+                  10 User Accounts<br>
                   </div>
-                  <div style="float:left">
-                  PRO<br>
+                  <div style="float:left;padding:20px">
+                  PRO DA Reseller<br>
                   <br>
-                  More Resources to fuel your growth<br>
+                  More Resources for growth<br>
                   <br>
-                  3 Years @ $24.99 /mo<br>
-                  $33.99/mo<br>
-                  SAVE 25%<br>
+                  $20 /mo<br>
+                  10 GB SSD Disk Space<br>
+                  20 GB Data Transfer<br>
+                  Free SSL Certificates<br>
                   Unlimited Websites<br>
-                  Free SSL Certificate<br>
-                  100 GB SSD Disk Space<br>
-                  2000 GB Data Transfer<br>
-                  Free WHMCS<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Databases<br>
+                  20 User Accounts<br>
                   </div>
-                  <div style="float:left">
-                  ULTIMATE<br>
+                  <div style="float:left;padding:20px">
+                  Ultimate DA Reseller<br>
                   <br>
                   Become a Web Hosting Pro<br>
                   <br>
-                  3 Years @ $36.99 /mo<br>
-                  $49.49/mo<br>
-                  SAVE 25%<br>
+                  $40 /mo<br>
+                  20 GB SSD Disk Space<br>
+                  50 GB Data Transfer<br>
+                  Free SSL Certificates<br>
                   Unlimited Websites<br>
-                  Free SSL Certificate<br>
-                  200 GB SSD Disk Space<br>
-                  3900 GB Data Transfer<br>
-                  Free WHMCS<br>
                   Unlimited Email<br>
-                  5 cPanel Accounts<br>
+                  Unlimited Databases<br>
+                  Unlimited User Accounts<br>
                   </div>
                 </div>   
            

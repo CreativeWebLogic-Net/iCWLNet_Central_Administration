@@ -115,7 +115,7 @@ function YY_checkform() { //v4.71
     </table></td>
     <td valign="top" class="rightbg">
       <br />
-      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td>
 		  
@@ -127,8 +127,80 @@ function YY_checkform() { //v4.71
         <tr>
           <td align="center" ><table width="100%"  border="0" cellspacing="0" cellpadding="10">
               <tr>
-                <td> <h2>Hosting Windows</h2>
-                <p><table style="padding:20px"><tbody><tr><td><p>Shared Hosting -&nbsp; Windows</p><p><br></p><table><tbody><tr><td>Basic Plesk<br><br> AUD$4.00 /mo<br> 2GB of Web Space<br> 2GB Monthly Traffic<br> 20 Email Accounts<br> 20 Mailing Lists<br> 20 MySQL Databases<br> 20 Max Domains<br> 20 Max Sub Domains<br> Australian Company<br> Order Today <br></td><td>Standard Plesk<br><br> AUD$6.00 /mo<br>4GB of Web Space<br>4GB Monthly Traffic<br>40 Email Accounts<br>40 Mailing Lists<br>40 MySQL Databases<br>40 Max Domains<br>40 Max Sub Domains<br> Australian Company<br> Order Today <br></td></tr><tr><td><br>Superior Plesk<br><br> AUD$10.00 /mo<br> 8GB of Web Space<br> 8GB Monthly Traffic<br> 80 Email Accounts<br> 80 Mailing Lists<br>80 MySQL Databases<br>80 Max Domains<br>80 Max Sub Domains<br> Australian Company<br> Order Today <br></td></tr></tbody></table><p></p><br></td><td><p>Unlimited Hosting -&nbsp; Windows</p><p><br></p><table><tbody><tr><td>Simple Plesk<br><br> AUD$6.00 /mo<br> 2GB of Web Space<br> 2GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Max Domains<br> Unlimited Max Sub Domains<br> Australian Company<br> Order Today <br></td><td>Easy Plesk<br><br> AUD$10.00 /mo<br>4GB of Web Space<br>4GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Max Domains<br> Unlimited Max Sub Domains<br> Australian Company<br> Order Today <br></td></tr><tr><td><br>Advanced Plesk<br><br> AUD$14.00 /mo<br> 8GB of Web Space<br> 8GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Max Domains<br> Unlimited Max Sub Domains<br> Australian Company<br> Order Today <br></td></tr></tbody></table><p></p><br></td></tr></tbody></table></p>            
+                <td> <h2>Plesk Hosting Windows</h2>
+                
+                <div>
+                  <div style="float:left;padding:20px">
+                  Basic Plesk<br>
+                  <br>
+                  AUD$4.00 /mo<br> 
+                  2GB of Web Space<br> 
+                  2GB Monthly Traffic<br> 
+                  20 Email Accounts<br> 
+                  20 Mailing Lists<br> 
+                  20 MySQL Databases<br> 
+                  20 Max Domains<br> 
+                  20 Max Sub Domains
+                  </div>
+
+                  <div style="float:left;padding:20px">
+                  Standard Plesk<br><br> 
+                  AUD$6.00 /mo<br>
+                  4GB of Web Space<br>
+                  4GB Monthly Traffic<br>
+                  40 Email Accounts<br>
+                  40 Mailing Lists<br>
+                  40 MySQL Databases<br>
+                  40 Max Domains<br>
+                  40 Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Simple Plesk<br><br> 
+                  AUD$6.00 /mo<br> 
+                  2GB of Web Space<br> 
+                  2GB Monthly Traffic<br> 
+                  Unlimited Email Accounts<br> 
+                  Unlimited Mailing Lists<br> 
+                  Unlimited MySQL Databases<br> 
+                  Unlimited Max Domains<br> 
+                  Unlimited Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Superior Plesk<br><br> 
+                  AUD$10.00 /mo<br> 
+                  8GB of Web Space<br> 
+                  8GB Monthly Traffic<br> 
+                  80 Email Accounts<br> 
+                  80 Mailing Lists<br>
+                  80 MySQL Databases<br>
+                  80 Max Domains<br>
+                  80 Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Easy Plesk<br><br> 
+                  AUD$10.00 /mo<br>
+                  4GB of Web Space<br>
+                  4GB Monthly Traffic<br>
+                  Unlimited Email Accounts<br> 
+                  Unlimited Mailing Lists<br> 
+                  Unlimited MySQL Databases<br> 
+                  Unlimited Max Domains<br> 
+                  Unlimited Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Advanced Plesk<br><br> 
+                  AUD$14.00 /mo<br> 
+                  8GB of Web Space<br> 
+                  8GB Monthly Traffic<br> 
+                  Unlimited Email Accounts<br> 
+                  Unlimited Mailing Lists<br> 
+                  Unlimited MySQL Databases<br> 
+                  Unlimited Max Domains<br> 
+                  Unlimited Max Sub Domains<br>
+                  </div>
+                </div>    
+
+               
            
 				
 				</td>

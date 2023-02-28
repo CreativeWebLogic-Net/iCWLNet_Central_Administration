@@ -22,9 +22,8 @@
 		//var $current_db_type="pgSQL";
 		var $num_rows=0;
 		var $Retreive_All_Variables=false;
-		var $app_data=array();
-
-		var $server_name="Hostgator Cloud";
+	
+	
 		
 		
 		function __construct(&$log=false){
@@ -45,41 +44,6 @@
 			//$this->log->general('Vs Success: ".var_export($this->vs,true),1);
 				
 		}
-
-		
-		public function Set_Links($links=false){
-			if($links){
-				//print "<br>\n\n Set_Links-----|-".var_export($links,true)."--|-- \n\n";
-				$this->links=$links;
-			}else{
-				//exit("<br>\n\n Exit_Links-----|-".var_export($links,true)."--|-- \n\n");
-			}
-			
-			//$this->log->general('Vs Success: ".var_export($this->vs,true),1);
-				
-		}
-		public function Get_Links(){
-			//print "<br>\n\n Get_Links-----|-".var_export($this->links,true)."--|-- \n\n";
-			return $this->links;
-			//$this->log->general('Vs Success: ".var_export($this->vs,true),1);
-				
-		}
-
-
-		public function Set_Result($result=false){
-			//print "<br>\n\n Set_Result-----|-".var_export($result,true)."--|-- \n\n";
-			$this->result=$result;
-			//$this->log->general('Vs Success: ".var_export($this->vs,true),1);
-				
-		}
-		public function Get_Result(){
-			//print "<br>\n\n Get_Result-----|-".var_export($this->result,true)."--|-- \n\n";
-			return $this->result;
-			//$this->log->general('Vs Success: ".var_export($this->vs,true),1);
-				
-		}
-
-
 
 		public function test_pgsql(){
 			
@@ -118,12 +82,12 @@
 			$current_server_tag=$DB['server_tag'];
 			$server_desc=$DB['server_desc'];
 			$db_login=$DB;
-			//echo"<br>-110----------------------".var_export($db_login,true)."-------------------------------------";
+			echo"<br>-110----------------------".var_export($db_login,true)."-------------------------------------";
 			$new_links = new mysqli($db_login['hostname'], $db_login['usernamedb'], $db_login['passworddb'],$db_login['dbName'] );
 			//print "99--|--".$db_login['hostname']."--|--".$db_login['usernamedb']."--|--".$db_login['passworddb']."--|--".$db_login['dbName']."--|--\n\n";
-			//echo"\n\n<br>-110001----------------------".var_export($new_links,true)."-------------------------------------";
+			echo"\n\n<br>-110001----------------------".var_export($new_links,true)."-------------------------------------";
 			$result =$this->test_mysql_db_link($new_links,$query);
-			//$this->result=$result;
+			$this->result=$result;
 			
 			/*
 			$query = 'SELECT * FROM administrators';
@@ -145,21 +109,19 @@
 		}
 
 		public function test_mysql_db_link($link=false,$query=false){
-			//echo"DDD-test_mysql_db_link---------".$query."------------------".var_export($link,true)."-------------------------------------------------\n\n";
+			echo"DDD-test_mysql_db_link---------".$query."------------------".var_export($link,true)."-------------------------------------------------\n\n";
 			
 			$result =false;
 			if(!$query){
 				$query = "SELECT * FROM administrators";
 			}
 			if(!$link){
-				//$link = $this->links;
-				$link=$this->Get_Links();
+				$link = $this->link;
 			}
 			
 			$result =$this->rawQuery($query,$link);
 			if($result){
-				//$result==$result;
-				$this->Set_Result($result);
+				$this->result=$result;
 			}
 			//$result = $link->query($query);
 			/*
@@ -169,7 +131,7 @@
 			*/
 			$result_array=array();
 			$result_array=$this->test_mysql_db_result($result);
-			//echo"EEE-last---------------------------||-".var_export($result_array,true)."---||----------------------------------------------\n\n";
+			echo"EEE-last---------------------------||-".var_export($result_array,true)."---||----------------------------------------------\n\n";
 			return $result;
 		}
 
@@ -181,20 +143,18 @@
 			echo"\n\n AAA------------test_mysql_db_result----------------".var_export($result,true)."-------------------------------------------------\n\n";
 			$result_array=array();
 			if(!$result){
-				//$result=$this->result;
-				$result=$this->Get_Result();
-				echo"\n\n FFF----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
+				$result=$this->result;
+				echo"FFF----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
 			
 			}else{
 				
-				//echo"AAB----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
-				//while($row = $this->Fetch_Array($result)){
-				while($row = $this->Fetch_Assoc($result)){
+				echo"AAB----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
+				while($row = $this->Fetch_Array($result)){
 					$result_array[]=$row;
-					echo"\n\n 123456----------------------------".var_export($row,true)."-------------------------------------------------\n\n";
+					echo"123456----------------------------".var_export($row,true)."-------------------------------------------------\n\n";
 					//print_r($row);
 				};
-				//echo"AABBCC-last----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
+				echo"AABBCC-last----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
 				
 			}
 			return $result_array;
@@ -207,8 +167,6 @@
 				$this->log->general("CreateDB Start Success: ",1);
 					
 				$this->m = new clsDatabaseConnect($this->log);
-				$this->m->Add_App_Data($this->app_data);
-				$this->current_db_type=$this->m->current_db_type;
 				//$this->m->Set_Log($this->log);
 				$this->log->general("CreateDB M Success: ",1);
 				
@@ -217,20 +175,10 @@
 				//$this->links = $this->m->Connect($this->DBFile);
 				$this->log->general("\n\n\n\nCurrent Position\n\n\n\n");
 				//$this->m->test_pgsql();
-				//echo"321-------------------".$this->current_db_type."----------------------------------------------------------\n\n";
-				$link = $this->m->Connect("",$this->current_db_type);
-				//echo"\n\n DB Set Link----------".var_export($link,true)."-------|".$this->current_db_type."|------\n\n";
+				echo"321-------------------".$this->current_db_type."----------------------------------------------------------\n\n";
+				$this->links = $this->m->Connect("",$this->current_db_type);
 				
-				//print_r($link);
-				$this->Set_Links($link);
-				//echo"\n\n DB Set Link----------".var_export($link,true)."-------------\n\n";
-				$this->server_name=$this->m->server_name;
-				//$result =$this->test_mysql();
-				//echo"\n\n 321-------------------".var_export($result,true)."----------------------------------------------------------\n\n";
-				$query = "SELECT * FROM administrators";
-				$result =$this->rawQuery($query,$link);
-				$row = $this->Fetch_Assoc($result);
-				//echo"\n\n 43210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
+
 				
 				/*
 				$res = pg_query("SELECT * FROM administrators");
@@ -243,10 +191,10 @@
 				//echo"987654321-------------------|-".$this->current_db_type."-|----------------------------------------------------------\n\n";
 				
 				if($this->current_db_type=="MySQL"){
-					if(isset($link->connect_error)) {
-						$this->log->general("Connection failed: " . $link->connect_error,3);
+					if(isset($this->links->connect_error)) {
+						$this->log->general("Connection failed: " . $this->links->connect_error,3);
 					}else{
-						$this->log->general("m->Connection Success: ".var_export($link,true),1);
+						$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
 					}
 				}elseif($this->current_db_type=="Sqlite"){
 					//echo"987654321-0-----------------------------------------------------------------------------";
@@ -261,13 +209,13 @@
 			//}catch(MySQLErrorException $e){
 			//	$this->log->general("MySQL Connection Error: ".var_export($e,true),3);
 			//}
-			return $link;
+			
 			
 		}
 
 		public function Initialise_Remote_Server($original=false){
-			//echo"\n\n 54321-----------------------------------------------------------------------------\n\n";
-			$this->m->Initialise_Remote_Server(array(),true);
+			
+			$this->m->Initialise_Remote_Server($original);
 			/*
 			if($original){
 				$this->current_server_tag=$this->original_server_tag;
@@ -291,59 +239,40 @@
 		//-----------------------------------------------------------------------------------------------------------
 		public function Set_Current_Server($Domain_Name){
 			//$this->links[$TArr]
-			$sql="SELECT username AS usernamedb,password AS passworddb,dbname,Main_Url AS hostname";
-			$sql.=" ,servers.Name AS server_desc,servers.id AS server_number,ServerName As server_tag ";
-			$sql.=" FROM domains,servers,servers_databases WHERE domains.serversID=servers.id AND ";
-			$sql.=" servers.id=servers_databases.serversID AND domains.Name='".$Domain_Name."' LIMIT 0,1";
-			//$sql="SELECT username,password,dbname,Main_Url,ServerName,servers.Name AS server_desc,servers.id AS server_number FROM domains,servers,servers_databases WHERE domains.serversID=servers.id";
-			//$sql.=" AND servers.id=servers_databases.seeversID AND dommains.Name='".$Domain_Name."' LIMIT 0,1";
-			$rslt=$this->rawQuery($sql);
-			$data=$this->Fetch_Assoc($rslt);
-			//echo"9991----------------------------".var_export($data,true)."-------------------------------------------------\n\n";
-			echo"9992-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
-			
+			$sql="SELECT username,password,dbname,Main_Url,ServerName,servers.Name AS server_desc,servers.id AS server_number FROM domains,servers,servers_databases WHERE domains.serversID=servers.id";
+			$sql=" AND servers.id=servers_databases.seeversID AND dommains.Name='".$Domain_Name."' LIMIT 0,1";
+			$this->rawQuery($sql);
+			$data=$this->Fetch_Array();
 			print_r($data);
-			echo"999210-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
-			
-			if(count($data)>0){
-				$this->DBFile=$data["server_tag"];
-				$this->current_link=$this->DBFile;
-				if(isset($this->server_login[$data["server_tag"]])){
-					$server_login[$this->$DBFile]=$this->server_login[$this->$DBFile];
-				}else{
-					//$DB=array();$data
-					$DB=$data;
-					/*
-					$DB['hostname']=$data["Main_Url"];
-					$DB['usernamedb']=$data["username"];
-					$DB['passworddb']=$data["password"];
-					$DB['dbName']=$data["dbname"];
-					$DB['server_tag']=$data["ServerName"];
-					$DB['server_desc']=$data["server_desc"];
-					$DB['server_number']=$data["server_number"];
-					$DB['current_dir']="./";
-					*/
-					$DB['current_dir']="./";
-					$DB['dbNames']=array();
-					$server_login[$DB['server_tag']]=array('server_tag'=>$DB['server_tag'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],'server_desc'=>$DB['server_desc'],'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],'hostname'=>$DB['hostname'],'dbName'=>$DB['dbname'],'dbNames'=>$DB['dbNames']);
-					$this->server_login=$server_login;
-					
-				}
+			/*
+			$this->$DBFile=$data["ServerName"];
+			$this->current_link=$this->$DBFile;
+			if(isset($this->server_login[$data["ServerName"]])){
+				$server_login[$this->$DBFile]=$this->server_login[$this->$DBFile];
+			}else{
+				$DB=array();
+				$DB['hostname']=$data["Main_Url"];
+				$DB['usernamedb']=$data["username"];
+				$DB['passworddb']=$data["password"];
+				$DB['dbName']=$data["dbname"];
+				$DB['server_tag']=$data["ServerName"];
+				$DB['server_desc']=$data["server_desc"];
+				$DB['server_number']=$data["server_number"];
+				$DB['current_dir']="./";
+				$DB['dbNames']=array();
+				$server_login[$DB['server_tag']]=array('server_tag'=>$DB['server_tag'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],'server_desc'=>$DB['server_desc'],'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],'hostname'=>$DB['hostname'],'dbName'=>$DB['dbName'],'dbNames'=>$DB['dbNames']);
+				$this->server_login[$DB['server_tag']]=$server_login[$DB['server_tag']];
 				
-				//-----------------------------------------------------------------------------------------------------------
-				echo"9991----------------------------".var_export($this->server_login,true)."-------------------------------------------------\n\n";
-					
-				$this->m->Initialise_Remote_Server($server_login[$this->DBFile]);
-				//$this->links[$this->DBFile] = $this->m->Connect($this->DBFile);
-				$this->links = $this->m->Connect($this->DBFile);
-				if(isset($this->links->connect_error)) {
-					$this->log->general("Connection failed: " . $this->links->connect_error,3);
-				}else{
-					$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
-				}
 			}
-			
-			
+			//-----------------------------------------------------------------------------------------------------------	
+			$this->m->Initialise_Remote_Server($server_login[$this->$DBFile]);
+			$this->links[$this->$DBFile] = $this->m->Connect($this->$DBFile);
+			if(isset($this->links->connect_error)) {
+				$this->log->general("Connection failed: " . $this->links->connect_error,3);
+			}else{
+				$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
+			}
+			*/
 		}
 		
 		function Reset(){
@@ -402,13 +331,6 @@
 		function Add_Sub_Query($Variable,$Parameter){
 			$this->NewSearchVar[$key]=$id;
 		}
-		public function Add_App_Data(&$app_data){
-			//print("ddd");
-			$this->app_data=$app_data;
-			//print_r($this->app_data);
-			
-		}
-		
 		/*
 		function Make_SQL(){
 			$select_variables=array();
@@ -450,8 +372,7 @@
 		*/
 		function GetRecord(){
 			//print "ll";
-			$link=$this->Get_Links();
-			if(!$link) $link=$this->CreateDB();
+			if(!$this->links) $this->CreateDB();
 			$m_arg = "SELECT * FROM $this->Table where $this->TargetField='$this->SearchVar'";
 			
 			foreach($this->NewSearchVar as $key=>$val){
@@ -461,9 +382,8 @@
 			//print("d11d");
 			$this->SQL=$m_arg;
 			//$result=$this->rawQuery($m_arg);
-			$result = $this->rawQuery($this->SQL);
-			$this->Set_Result($result);
-			if($result){
+			$this->result = $this->rawQuery($this->SQL);
+			if($this->result){
 				$m_rows = $this->Fetch_Assoc();
 				//print_r($m_rows);
 				if(is_array($m_rows)){
@@ -474,17 +394,15 @@
 				//print("ddd");
 				return $m_rows;
 			}else{
-				$this->log->general("Multi MySQL Error->".var_export($result,true)." ".$query,3);
+				$this->log->general("Multi MySQL Error->".var_export($this->result,true)." ".$query,3);
 				//print "ERROR: $m_arg";
 			}
 		}
 		function GetMultiRecord(){
-			$link=$this->Get_Links();
-			if(!$link) $link=$this->CreateDB();
+			if(!$this->links) $this->CreateDB();
 			$m_arg = "SELECT * FROM $this->Table where $this->TargetField='$this->SearchVar'";
 			
-			$result=$this->rawQuery($m_arg);
-			$this->Set_Result($result);
+			$this->result=$this->rawQuery($m_arg);
 			if($this->result){
 				while($m_rows = $this->Fetch_Array());
 				{
@@ -496,57 +414,51 @@
 					$count++;
 				}
 			}else{
-				$this->log->general("Multi MySQL Error->".var_export($result,true)." ".$query,3);
+				$this->log->general("Multi MySQL Error->".var_export($this->result,true)." ".$query,3);
 				//print "ERROR: $m_arg";
 			}
 			return $m_rows;
 		}
 		
 		//function rawQuery($query="",$links=false)
-		function rawQuery($query="",$link=false)
+		function rawQuery($query="",$links=false)
 		{
-			//echo"\n\n 9---rawQuery--------------------".$query."------------------------------------------------------\n\n";
+			echo"\n\n 9-----------------------".$query."------------------------------------------------------\n\n";
 			
 			$result=false;
-			//if(!$links) $links=$this->links;
-
-			//echo"999----------------------------".var_export($link,true)."-------------------------------------------------\n\n";
 			
-			
-			if(!$link){
-				//$link=$this->links;
-				$link=$this->Get_Links();
+			if(!$links){
+				if(!$this->links){
+					$links=$this->CreateDB();
+				}else{
+					$links=$this->links;
+				}
+				
 			}else{
 
 			}
 			
 			try{
-				echo"9123---rawQuery------------------------|-".$query."-|-------|-".$this->current_db_type."-|---------------------------------------\n\n";
+				echo"ooo----------------------------".$query."---------".$this->current_db_type."----------------------------------------\n\n";
 				$this->SQL=$query;
-				if($link){
-					//echo"999----------------------------".var_export($links,true)."-------------------------------------------------\n\n";
-			
-					if($this->current_db_type=="pgSQL"){
-						$result = pg_query($query);
-					}elseif($this->current_db_type=="MySQL"){
-						//$this->test_mysql_db_link($links);
-						$result = $link->query($query);
-						//echo"454------------test_mysql_db_resul-----------------------------------------------------------------";
-						//$this->test_mysql_db_result($result);
-						
-					}elseif($this->current_db_type=="Sqlite"){
-						//echo"454-----------------------------------------------------------------------------";
-					}
-				}
 				
+				if($this->current_db_type=="pgSQL"){
+					$result = pg_query($query);
+				}elseif($this->current_db_type=="MySQL"){
+					//$this->test_mysql_db_link($links);
+					$result = $links->query($query);
+					echo"454------------test_mysql_db_resul-----------------------------------------------------------------";
+					$this->test_mysql_db_result($result);
+					
+				}elseif($this->current_db_type=="Sqlite"){
+					echo"454-----------------------------------------------------------------------------";
+				}
 				
 				if(!$result){
 					$this->log->general("No MySQL Result->".$query,3);
-					echo"9001---rawQuery Error------------------------|-".$query."-|---\n----|-".$this->current_db_type."-|---------------------------------------\n\n";
-				
 					return false;
 				}else{
-					//echo"999----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
+					echo"999----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
 			
 					return $result;
 				}
@@ -556,18 +468,15 @@
 			
 			}
 			
-			//$this->links=$links;
-			$this->Set_Links($link);
-			$this->Set_Result($result);
-			//$this->result=$result;
+			$this->links=$links;
+			$this->result=$result;
 			return $result;
 		}
 		
 		function NumRows($result=false){
 			if(!$result){
-				$result=$this->Get_Result();
+				$result=$this->result;
 			}
-			$link=$this->Get_Links();
 			$num_rows=0;
 			try{
 				//$this->log->general("Start Num Rows->",3);
@@ -576,12 +485,10 @@
 				//$this->log->general("\n",3);
 				$num_rows=0;
 				if($this->current_db_type=="MySQL"){
-					$this->log->general("Connection failed: " . $link->connect_error,3);
-					$this->log->general("m->Connection Success: ".var_export($link,true),1);
+					$this->log->general("Connection failed: " . $this->links->connect_error,3);
+					$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
 					//$this->result->reset();
-					$num_rows=$result->num_rows;
-					//echo"9875654321-----------------%-".$num_rows."-%--|--".$this->SQL."--|----------------------------------------------------\n\n";
-			
+					$this->num_rows=$result->num_rows;
 				}elseif($this->current_db_type=="Sqlite"){
 					
 					//$this->num_rows=$this->result->num_rows;
@@ -605,12 +512,7 @@
 				$this->log->general("MySQL NumRows Exception->".var_export($e,true)." ".$this->SQL,3);
 				return 0;
 			}
-			//////echo"98756543210-----------------%-".$num_rows."-%---------------|--".$this->SQL."--|-------------------------------------------\n\n";
-				
 			$this->num_rows=$num_rows;
-
-			//echo"9875654321000-----------------%-".$this->num_rows."-%----------|--".$this->SQL."--|------------------------------------------------\n\n";
-			
 			return $num_rows;
 		}
 		/*
@@ -618,7 +520,7 @@
 		{
 			$row=array();
 			if(!$result){
-				//echo"4321-----------------%--%----------------------------------------------------------";
+				echo"4321-----------------%--%----------------------------------------------------------";
 				
 				$result=$this->result;
 			}
@@ -630,7 +532,7 @@
 						if($this->NumRows()==0){
 							$row=array();	
 						}
-						//echo"9875654321-----------------%-".var_export($row,true)."-%----------------------------------------------------------";
+						echo"9875654321-----------------%-".var_export($row,true)."-%----------------------------------------------------------";
 				
 					}else{
 						
@@ -657,16 +559,13 @@
 		function Fetch_Array($result=false)
 		{
 			$row=array();
-			if(!$result) $result=$this->Get_Result();
-			if($result){
-				if(!$result) $result=$this->result;
-				if($this->current_db_type=="MySQL"){
-					$row = $result->fetch_array(MYSQLI_NUM);
-				}elseif($this->current_db_type=="Sqlite"){
-					$row = $result->fetchArray(SQLITE3_NUM);
-				}elseif($this->current_db_type=="pgSQL"){
-					$row =pg_fetch_array($result);
-				}
+			if(!$result) $result=$this->result;
+			if($this->current_db_type=="MySQL"){
+				$row = $result->fetch_array(MYSQLI_NUM);
+			}elseif($this->current_db_type=="Sqlite"){
+				$row = $result->fetchArray(SQLITE3_NUM);
+			}elseif($this->current_db_type=="pgSQL"){
+				$row =pg_fetch_array($result);
 			}
 			return $row;
 			
@@ -676,26 +575,26 @@
 		{
 			//echo"fff-----------------------------------------------------------------------------";
 			$row=array();
-			if(!$result) $result=$this->Get_Result();
-			if($result){
-				if($this->current_db_type=="MySQL"){
-					$row = $result->fetch_array(MYSQLI_ASSOC);
-					
-				}elseif($this->current_db_type=="Sqlite"){
-					$row = $result->fetchArray(SQLITE3_ASSOC);
-				}elseif($this->current_db_type=="pgSQL"){
-					$row =pg_fetch_assoc($result);
-				}
+			if(!$result) $result=$this->result;
+			if($this->current_db_type=="MySQL"){
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				
+			}elseif($this->current_db_type=="Sqlite"){
+				$row = $result->fetchArray(SQLITE3_ASSOC);
+			}elseif($this->current_db_type=="pgSQL"){
+				$row =pg_fetch_assoc($result);
 			}
+			
 			//echo"2233----------------------------------------------------------|-".var_export($row,true)."-|-----------------";
 			return $row;
+			
 		}
 
 		function Fetch_Both($result=false)
 		{
 			//echo"fff-----------------------------------------------------------------------------";
 			$row=array();
-			if(!$result) $result=$this->Get_Result();
+			if(!$result) $result=$this->result;
 			if($this->current_db_type=="MySQL"){
 				$row = $result->fetch_array(MYSQLI_BOTH);
 				
@@ -715,7 +614,7 @@
 		{
 			//echo"fff-----------------------------------------------------------------------------";
 			$row=array();
-			if(!$result) $result=$this->Get_Result();
+			if(!$result) $result=$this->result;
 			switch($type){
 				case "Both":
 					$row =$this->Fetch_Both($result);
@@ -734,8 +633,7 @@
 		
 		function Error()
 		{
-			$result=$this->Get_Result();
-			$er = $result->error;
+			$er = $this->result->error;
 			return $er;
 			
 		}
@@ -1672,7 +1570,6 @@
 		var $default_db=array();
 		var $def_db="";
 		var $server_names=array();
-		var $server_name="Hostgator Cloud";
 		var $server_num=0;
 		var $db_num=array(0=>0,1=>0,2=>0);
 		var $def_db_num=array(0=>0,1=>0,2=>0);
@@ -1687,9 +1584,6 @@
 		var $db_name_def_num=array(0=>0,1=>0,2=>0);
 		var $db_num_ser=array(0=>0,1=>0,2=>0);
 		var $current_server_tag="";
-		var $current_db_type="MySQL";
-		var $original_server_tag="";
-		var $app_data=array();
 		//-----------------------------------------------------------------------------------------------------------
 	
 		//function ConnectDbase(){
@@ -1698,8 +1592,7 @@
 			if($log){
 				$this->log=$log;
 			}
-			//$this->Initialise_Current_Server();
-			//$this->get_login_details();
+			$this->Initialise_Current_Server();
 		}
 		//-----------------------------------------------------------------------------------------------------------
 		
@@ -1709,13 +1602,6 @@
 			$this->log->general("-Set Log Boot Success: $r->".var_export($log,true),3);
 			//$this->log->general('Set Log Boot Success: $r->',1);
 				
-		}
-
-		public function Add_App_Data(&$app_data){
-			
-			$this->app_data=$app_data;
-			//print_r($this->app_data);
-			$this->get_login_details();
 		}
 
 		//-----------------------------------------------------------------------------------------------------------
@@ -1784,9 +1670,9 @@
 			// Performing SQL query
 			$query = 'SELECT * FROM administrators';
 			//$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-			//echo"43210000555-------------------|-".var_export($dbconn,true)."-|----------------------------------------------------------\n\n";
+			echo"43210000555-------------------|-".var_export($dbconn,true)."-|----------------------------------------------------------\n\n";
 			$result = pg_query($query);
-			//echo"432100001-------------------|-".$query."-|----------------------------------------------------------\n\n";
+			echo"432100001-------------------|-".$query."-|----------------------------------------------------------\n\n";
 			// Printing results in HTML
 			echo "<table>\n";
 			while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -1805,73 +1691,51 @@
 			pg_close($dbconn);
 			
 		}
-		
-		public function get_login_details(){
-			//echo"<br>\n\n\n-1102122--------------------|---".var_export($this->app_data,true)."--|----------------------------------\n\n";
-			//print "<br>\n\n DBDetails--End---|-".var_export($server_login,true);
-			//$DB=array();	
-			//print_r($this->app_data);
-			$load_file=$this->app_data['CLASSESBASEDIR']."db.php";
-			//print $load_file;
-			if (file_exists($load_file)) {
-				include($load_file);
-				
 
-			
-				$this->current_server_tag=$DB['server_tag'];
-				$this->current_dir=$DB['current_dir'];
-				$this->server_name=$DB['server_desc'];
-				$this->server_desc=$DB['server_desc'];
-				$this->server_login=$server_login;
-				$this->current_db_type=$DB['server_type'];
-				//exit("<br>\n\n DBDetails--exit---|-".var_export($server_login,true));
-			}else{
-				print "<br>\n\n get_login_details-----|-".var_export($server_login,true);
-			}
-			if($this->original_server_tag=="") $this->original_server_tag=$this->current_server_tag;
-			/////exit("login");			//$this->server_login=get_details();
+		private function get_login_details(){
+			include_once("classes/db.php");
+			//print "<br>\n\n DBDetails-----|-".var_export($server_login);
+			$this->current_server_tag=$DB['server_tag'];
+			$this->current_dir=$DB['current_dir'];
+				//$this->server_name=$server_name;
+			$this->server_desc=$DB['server_desc'];
+			$this->server_login=$server_login;
+			//$this->server_login=get_details();
 			//print_r($this->current_server_tag=$this->server_login);
 			/*
 			$this->current_server_tag=$this->server_login[0]['server_tag'];
 			$this->server_desc=$this->server_login[0]['server_tag'];
 			*/
-
-			//print "<br>\n\n get_login_details--final---|-".var_export($server_login,true);
-			//exit("\n xxx11 \n");
-			//print "<br>\n\n DBDetails--End---|-".var_export($server_login,true);
 		}
-		
+
 		//-----------------------------------------------------------------------------------------------------------
-		public function Initialise_Remote_Server($server_login=array(),$original=false){
-		//public function Initialise_Remote_Server($original=false){
-			//echo"\n\n-1234------Remote_Server--------------|--".var_export($server_login,true)."--|-----------------------------------\n";
-			//print_r($server_login);
+		//public function Initialise_Remote_Server($server_login=array(),$original=false){
+		public function Initialise_Remote_Server($original=false){
+			/*
 			if($original){
 				$this->current_server_tag=$this->original_server_tag;
 			}else{
 				$remote_server=array();
-				$this->server_login=$server_login;
 				/*foreach($server_login as $server_key){
 					$remote_server[$server_key]=$server_login[$server_key];
 					$this->server_login[$server_key]=$remote_server[$server_key];
 					$this->current_server_tag=$server_key;
 				}*/
-				//print_r($this->server_login);
-				$server_key=$this->server_login['server_tag'];
-				$remote_server[$server_key]=$this->server_login;
+				/*
+				$server_key=$server_login['server_tag'];
+				$remote_server[$server_key]=$server_login;
 				$this->server_login[$server_key]=$remote_server[$server_key];
 				$this->current_server_tag=$server_key;
 			}
+			*/
 			
-			//exit("Initialise_Remote_Server");
 		}
 		
 		public function Connect($TArr="",$db_type="MySQL"){
 			
 			//$this->test_pgsql();
 			//exit("yy");
-			//echo"\n\n\n-Connect-111-----".$TArr."--------------|--".var_export($this->server_login,true)."---|----------------------------------\n\n";
-			
+			$this->get_login_details();
 			
 			try{	
 				 //$db_ser_num=$this->Initialise_Current_Server();
@@ -1879,7 +1743,7 @@
 				//if($TArr==""){
 				//}
 				//exit($db_type);
-				//echo"\ -1------Connect----------------".$db_type."-------------------------------------\n";
+				echo"-1----------------------".$db_type."-------------------------------------";
 				if($db_type=="MySQL"){
 					
 					if(isset($this->links[$TArr]))
@@ -1888,50 +1752,32 @@
 					}
 					else
 					{
-						
 						if($TArr==""){
 							$TArr=$this->current_server_tag;
 						}
-						//echo"\n -2----------------------".$db_type."-------------------------------------\n";
-						
-						//if(count($this->server_login)==0){
-							//echo"<br>\n\n\n-1102001----Connect----------------|--".var_export($this->server_login,true)."---|----------------------------------\n\n";
-							//print_r($this->app_data);
-							//$this->get_login_details();
-							//exit("\n xxx2 \n");
-							
-						//}else{
-
-						//}
-						//echo"<br>\n\n\n-Connect-123-------------------|--".var_export($this->server_login,true)."---|----------------------------------\n\n";
-			
-
-						//$this->get_login_details();
-						//echo"<br>\n\n\n-8888-------------------|--".var_export($this->server_login,true)."---|----------------------------------\n\n";
+						echo"<br>\n\n\n-1102--------------------|--".var_export($this->server_login)."---|----------------------------------\n\n";
 							
 						try{
-							//print_r($this->server_login);
 							$db_login=$this->server_login[$TArr];
-							//echo"<br>-110----------------------".var_export($db_login,true)."-------------------------------------";
+							echo"<br>-110----------------------".var_export($db_login,true)."-------------------------------------";
 							try{
 								$new_links = new mysqli($db_login['hostname'], $db_login['usernamedb'], $db_login['passworddb'],$db_login['dbName'] );
-								//print "99--|--".$db_login['hostname']."--|--".$db_login['usernamedb']."--|--".$db_login['passworddb']."--|--".$db_login['dbName']."--|--\n\n";
+								print "99--|--".$db_login['hostname']."--|--".$db_login['usernamedb']."--|--".$db_login['passworddb']."--|--".$db_login['dbName']."--|--\n\n";
 							}catch(MySQLException $e){
 								
 							}
-							//echo"\n\n<br>-110001----------------------".var_export($new_links,true)."-------------------------------------";
+							echo"\n\n<br>-110001----------------------".var_export($new_links,true)."-------------------------------------";
 							
 
 							// Check connection
 							if($new_links->connect_error) {
-								//$this->log->general("-Connection Error-".$new_links->connect_error."\n vars:=".var_export($db_login),3);
-								//echo"\n\n\n-CError--------------------|--".var_export($db_login,true)."---|----------------------------------\n\n";
-			
+								$this->log->general("-Connection Error-".$new_links->connect_error."\n vars:=".var_export($db_login),3);
+								echo"\n\n-777-\n\n";
 							}else{
 								$this->log->general("-Connection Success->".$TArr,1);
 								$this->log->general("\n",1);
 								$this->links[$TArr]=$new_links;
-								//echo"\n\n-7778-".$new_links->connect_error."\n\n";
+								echo"\n\n-7778-".$new_links->connect_error."\n\n";
 							}
 							
 						}catch(MySQLErrorException $e){

@@ -1,5 +1,5 @@
 <?php
 
     $log->display_all();
-    ob_end_flush();
+    //ob_end_flush();
 ?>

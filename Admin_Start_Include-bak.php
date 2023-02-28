@@ -106,7 +106,7 @@
 			//
 			$_SESSION['original_languagesID']=false;
 			$_SESSION['original_domainsID']=false;
-			echo"--44845-\n\n".var_export($_SESSION,true)."--4484599-\n\n";
+			//echo"--44845-\n\n".var_export($_SESSION,true)."--4484599-\n\n";
 		}else{
 			if(isset($_POST['languagesID'])){
 				if($_POST['languagesID']){
@@ -132,12 +132,12 @@
 		}
 	}
 	$_SESSION['languagesID']=$_SESSION['original_languagesID'];
-	echo"--448-\n\n";
-	print_r($_POST);
-	echo"--118-\n\n";
-	echo"--4428-\n\n";
-	print_r($_SESSION);
-	echo"--1128-\n\n";
+	//echo"--448-\n\n";
+	//print_r($_POST);
+	//echo"--118-\n\n";
+	//echo"--4428-\n\n";
+	//print_r($_SESSION);
+	//echo"--1128-\n\n";
 	
 	/*
 	if(isset($_POST['clientsID'])){
@@ -199,7 +199,7 @@
 		//$head_r=&$r;
 		$sql="SELECT id,Name FROM languages ORDER BY Name";
 		$rslt=$r->rawQuery($sql);
-		print $sql;
+		//print $sql;
 		$LanguageCount=$r->NumRows($rslt);
 		//for($x=0;$x<$LanguageCount;$x++){
 		while($data=$r->Fetch_Array()){
@@ -224,7 +224,7 @@
 	//if(isset($_SESSION['original_domainsID'])){
 		$domain_name="sitemanage.info";
 		$sql="SELECT domains.Name,ClientsID FROM domains WHERE domains.id='".$_SESSION['original_domainsID']."'";
-		print $sql;
+		//print $sql;
 		$rslt=$r->rawQuery($sql);
 		$data=$r->Fetch_Array();
 		if($r->NumRows>0){
@@ -234,7 +234,7 @@
 			$r->Set_Current_Server($domain_name);
 
 			$sql="SELECT domains.id FROM domains WHERE domains.Name='".$domain_name."'";
-			print $sql;
+			//print $sql;
 			$rslt=$r->rawQuery($sql);
 			$data=$r->Fetch_Array();
 			if($r->NumRows()>0){
@@ -245,7 +245,7 @@
 		
 		
 	//};
-	print "-1------------------------------------------------------------------";
+	//print "-1------------------------------------------------------------------";
 	$domain_name="sitemanage.info";
 	$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains WHERE (SELECT clientsID FROM domains WHERE) ORDER BY Name";
 	/*
@@ -265,7 +265,7 @@
 		}
 	};
 	*/
-	print $sql;
+	//print $sql;
 	
 	$rslt=$r->rawQuery($sql);
 	if($r->NumRows()>0){
@@ -296,9 +296,9 @@
 			};
 		}
 	}
-	echo"--4468-\n\n";
-	print_r($_POST);
-	echo"--1168-\n\n";
+	//echo"--4468-\n\n";
+	//print_r($_POST);
+	//echo"--1168-\n\n";
 	echo"--44268-\n\n";
 	print_r($_SESSION);
 	echo"--11268-\n\n";

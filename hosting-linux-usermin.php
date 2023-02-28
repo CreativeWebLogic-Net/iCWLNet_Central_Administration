@@ -115,7 +115,7 @@ function YY_checkform() { //v4.71
     </table></td>
     <td valign="top" class="rightbg">
       <br />
-      <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td>
 		  
@@ -128,7 +128,93 @@ function YY_checkform() { //v4.71
           <td align="center" ><table width="100%"  border="0" cellspacing="0" cellpadding="10">
               <tr>
                 <td> <h2>Hosting Linux</h2>
-                <p><span id="sceditor-start-marker" class="sceditor-selection sceditor-ignore" style="display: none; line-height: 0;"> </span><span id="sceditor-end-marker" class="sceditor-selection sceditor-ignore" style="display: none; line-height: 0;"> </span> <br></p><table style="padding:20px"><tbody><tr><td valign="top"><p><br>Shared Accounts - Linux</p><p><br></p><table><tbody><tr><td valign="top">Tiny Usermin<br><br> AUD$1.00 /mo<br> 1GB of Web Space<br> 1GB Monthly Traffic<br> 5 Email Accounts<br> 2 Mailing Lists<br> 1 MySQL Databases<br> 2 Max Domains<br> 5 Max Sub Domains<br> Australian Company<br> Order Today <br></td><td>Basic Usermin<br><br> AUD$2.00 /mo<br> 2GB of Web Space<br> 2GB Monthly Traffic<br> 5 Email Accounts<br> 5 Mailing Lists<br> 5 MySQL Databases<br> 5 Max Domains<br> 5 Max Sub Domains<br> Australian Company<br> Order Today</td><td><br></td></tr><tr><td><br>Corporate Usermin<br><br> AUD$8.00 /mo<br> 8GB of Web Space<br> 8GB Monthly Traffic<br> 20 Email Accounts<br> 20 Mailing Lists<br> 20 MySQL Databases<br> 20 Max Domains<br> 20 Max Sub Domains<br> Australian Company<br> Order Today<br></td><td><br>Business Usermin<br><br> AUD$4.00 /mo<br> 4GB of Web Space<br> 4GB Monthly Traffic<br> 10 Email Accounts<br> 10 Mailing Lists<br> 10 MySQL Databases<br> 10 Max Domains<br> 10 Max Sub Domains<br> Australian Company<br> Order Today</td></tr></tbody></table><p><br></p><br></td><td valign="top"><p><br>Unlimited Accounts - Linux</p><p><br></p><table><tbody><tr><td>Biz Usermin<br><br> AUD$10.00 /mo<br> 10GB of Web Space<br> 10GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Domains<br> Unlimited Sub Domains<br> Australian Company<br> Order Today<br></td><td></td><td>Super Usermin<br><br> AUD$15.00 /mo<br> 15GB of Web Space<br> 15GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Domains<br> Unlimited Sub Domains<br> Australian Company<br> Order Today<br></td></tr><tr><td><br> Amazing Usermin<br><br> AUD$20.00 /mo<br> 20GB of Web Space<br> 20GB Monthly Traffic<br> Unlimited Email Accounts<br> Unlimited Mailing Lists<br> Unlimited MySQL Databases<br> Unlimited Domains<br> Unlimited Sub Domains<br> Australian Company<br> Order Today<br></td></tr></tbody></table><br><br><br><br><p class="sceditor-nlf"><br></p><br> <br></td></tr></tbody></table>
+                <div style="float:left;padding:20px">
+                Shared Accounts - Linux<br>
+                  <div style="float:left;padding:20px">
+                  Tiny Usermin<br><br> 
+                  AUD$1.00 /mo<br> 
+                  1GB of Web Space<br> 
+                  1GB Monthly Traffic<br> 
+                  5 Email Accounts<br> 
+                  2 Mailing Lists<br> 
+                  1 MySQL Databases<br> 
+                  2 Max Domains<br> 
+                  5 Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Basic Usermin<br><br> 
+                  AUD$2.00 /mo<br> 
+                  2GB of Web Space<br> 
+                  2GB Monthly Traffic<br> 
+                  5 Email Accounts<br> 
+                  5 Mailing Lists<br> 
+                  5 MySQL Databases<br> 
+                  5 Max Domains<br> 
+                  5 Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Corporate Usermin<br><br> 
+                  AUD$8.00 /mo<br> 
+                  8GB of Web Space<br> 
+                  8GB Monthly Traffic<br> 
+                  20 Email Accounts<br> 
+                  20 Mailing Lists<br> 
+                  20 MySQL Databases<br> 
+                  20 Max Domains<br> 
+                  20 Max Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                Business Usermin<br><br> 
+                AUD$4.00 /mo<br> 
+                4GB of Web Space<br> 
+                4GB Monthly Traffic<br> 
+                10 Email Accounts<br> 
+                10 Mailing Lists<br> 
+                10 MySQL Databases<br> 
+                10 Max Domains<br> 
+                10 Max Sub Domains<br>
+                  5 Max Sub Domains<br>
+                  </div>
+                </div>
+                <div style="float:left;padding:20px">
+                Unlimited Accounts - Linux<br>
+                <div style="float:left;padding:20px">
+                Biz Usermin<br><br> 
+                AUD$10.00 /mo<br> 
+                10GB of Web Space<br> 
+                10GB Monthly Traffic<br> 
+                Unlimited Email Accounts<br> 
+                Unlimited Mailing Lists<br> 
+                Unlimited MySQL Databases<br> 
+                Unlimited Domains<br> 
+                Unlimited Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Super Usermin<br><br> 
+                  AUD$15.00 /mo<br> 
+                  15GB of Web Space<br> 
+                  15GB Monthly Traffic<br> 
+                  Unlimited Email Accounts<br> 
+                  Unlimited Mailing Lists<br> 
+                  Unlimited MySQL Databases<br> 
+                  Unlimited Domains<br> 
+                  Unlimited Sub Domains<br>
+                  </div>
+                  <div style="float:left;padding:20px">
+                  Amazing Usermin<br><br> 
+                  AUD$20.00 /mo<br> 
+                  20GB of Web Space<br> 
+                  20GB Monthly Traffic<br> 
+                  Unlimited Email Accounts<br> 
+                  Unlimited Mailing Lists<br> 
+                  Unlimited MySQL Databases<br> 
+                  Unlimited Domains<br> 
+                  Unlimited Sub Domains<br>
+                  </div>
+                  </div>
+
+
+                
                 
                 
                 </p>            

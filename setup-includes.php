@@ -60,7 +60,11 @@
 	$vs->Set_Log($log);
 	$log->general("-clsVariables Loaded-",1);
 	$r=new clsDatabaseInterface($log);
+	$r->Add_App_Data($app_data);
 	$r->CreateDB();
+	//print_r($app_data);
+	
+	
 	$log->general('Loading Create VS $r',1);
 	$r->Set_Vs($vs);
 
