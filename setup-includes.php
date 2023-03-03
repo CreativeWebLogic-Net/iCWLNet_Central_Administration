@@ -24,6 +24,7 @@
 	$app_data['asset-severs'][7]='https://static-assets.w-d.biz/'; //cloud unlimited server
 	$app_data['asset-severs'][8]='https://assets.i-n.club/'; //ionos unlimited server
 	$app_data['asset-severs'][9]='https://assets.creativeweblogic.net'; //ionos unlimited server
+	$app_data['asset-severs'][10]='https://assets.creativeweblogic.net'; //ionos unlimited server
 
 	$app_data['asset-sever']=$app_data['asset-severs'][$app_data['asset_server_number']];
 	//----------------------------------------------------------------
