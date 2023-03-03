@@ -81,7 +81,7 @@
 		}
 
 	}
-	
+	print_r($app_data);
 
 ?><html>
 <head>
