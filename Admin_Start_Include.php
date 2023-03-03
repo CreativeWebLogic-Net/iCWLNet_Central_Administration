@@ -35,12 +35,12 @@
 	}
 	
 	$tag_match_array=array();
-
+	//echo"<br>0005501----------------------------|-|-------------------------------------------------\n\n";
 	include($include_dir."setup-includes.php");
 	include_once($include_dir."includes/functions.inc.php");
 	//ob_start("callback");
 	
-	//echo"<br>00055----------------------------|".$_SESSION["administratorsID"]."|-------------------------------------------------\n\n";
+	//echo"<br>\n\n 00055----------------------------|-|-------------------------------------------------\n\n";
 	
 	//-----------------------------------------------------------------------------------------------------------	
 	// Set app variables from drop down menu posting
@@ -180,28 +180,31 @@
 				$num_rows=$r->NumRows($rslt);
 				//echo"--12345432100----|--".$num_rows."---|-".var_export($data,true)."-|---\n\n";
 				if($num_rows>0){
-					//echo"--123454321----|--".$sql."---|-".var_export($data,true)."-|---\n\n";
-					$domain_name=$data[0];
-					$app_data['remote_server']['domain_name']=$domain_name;
-					$domain_id=0;
-					$_SESSION['original_clientsID']=$data[1];
-					$app_data['original_clientsID']=$data[1];
-					// ------------------------- access remote server installation
-					$r->Set_Current_Server($domain_name);
-					//echo"--4321-\n\n";
-					$sql="SELECT domains.id FROM domains WHERE domains.Name='".$domain_name."'";
-					//print $sql;
-					//print "\n\n".$sql."\n\n";
-					$rslt=$r->rawQuery($sql);
-					$data=$r->Fetch_Array();
-					//echo"--4445-\n\n".$domain_id;
-					//print_r($data);
-					if($r->NumRows()>0){
-						$domain_id=$data[0];
-						$_SESSION['domainsID']=$domain_id;
-						$app_data['domainsID']=$domain_id;
-						//echo"--4333-\n\n".$domain_id;
+					if(is_array($data)){
+						//echo"--123454321----|--".$sql."---|DDD-".var_export($data,true)."-|---\n\n";
+						$domain_name=$data[0];
+						$app_data['remote_server']['domain_name']=$domain_name;
+						$domain_id=0;
+						$_SESSION['original_clientsID']=$data[1];
+						$app_data['original_clientsID']=$data[1];
+						// ------------------------- access remote server installation
+						$r->Set_Current_Server($domain_name);
+						//echo"--4321-\n\n";
+						$sql="SELECT domains.id FROM domains WHERE domains.Name='".$domain_name."'";
+						//print $sql;
+						//print "\n\n".$sql."\n\n";
+						$rslt=$r->rawQuery($sql);
+						$data=$r->Fetch_Array();
+						//echo"--4445-\n\n".$domain_id;
+						//print_r($data);
+						if($r->NumRows()>0){
+							$domain_id=$data[0];
+							$_SESSION['domainsID']=$domain_id;
+							$app_data['domainsID']=$domain_id;
+							//echo"--4333-\n\n".$domain_id;
+						}
 					}
+					
 				}
 			}else{
 				//echo"--2222-\n\n";
@@ -221,22 +224,24 @@
 	try{
 		$r->Initialise_Remote_Server(true);
 		if(isset($_SESSION['original_clientsID'])){
-			
-			if($_SESSION["SU"]!="No"){
+			if(isset($_SESSION["SU"])){
+				if($_SESSION["SU"]!="No"){
 				
 					$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains WHERE clientsID=".$_SESSION['original_clientsID']." ORDER BY Name";
 				
-			}else{
-				
-				if(isset($_SESSION['administratorsID'])){
-					$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains,administrators_domains ";
-					$sql.="WHERE domains.id=administrators_domains.domainsID AND administratorsID=".$_SESSION['administratorsID']." AND clientsID=".$_SESSION['original_clientsID'];
-					$sql.=" ORDER BY Name";
 				}else{
-					$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains WHERE id=666";
+					
+					if(isset($_SESSION['administratorsID'])){
+						$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains,administrators_domains ";
+						$sql.="WHERE domains.id=administrators_domains.domainsID AND administratorsID=".$_SESSION['administratorsID']." AND clientsID=".$_SESSION['original_clientsID'];
+						$sql.=" ORDER BY Name";
+					}else{
+						$sql="SELECT domains.id,SiteTitle,Name as Host FROM domains WHERE id=666";
+					}
+					
 				}
-				
 			}
+			
 			
 		}else{
 			if(!$_SESSION['original_clientsID']){
@@ -255,9 +260,13 @@
 		
 		$rslt=$r->rawQuery($sql);
 		//print "\n\n -- 5554321--".$sql."----|--".var_export($app_data,true)."-|--\n\n";
-		if($r->NumRows($rslt)>0){
-			//print "\n\n -- 555--".$sql."\n\n";
+		$num_rows=$r->NumRows($rslt);
+		//print "\n\n -- 555--".$num_rows."\n\n";
+		if($num_rows>0){
+			$data=$r->Fetch_Array($rslt);
+			//print "\n\n -- 55500--".$sql."\n\n";
 			while($data=$r->Fetch_Array($rslt)){
+				//print "\n\n -- 54321--".$sql."----|--".var_export($data,true)."-|--\n\n";
 				if(isset($_SESSION['original_domainsID'])){
 					if(!is_numeric($_SESSION['original_domainsID'])){
 						$_SESSION['original_domainsID']=$data[0];
@@ -269,8 +278,13 @@
 				}
 				//$tmp=($data[0]==$_SESSION['domainsID'] ? true : false);
 				//$app_data['domains'][]=array($data[0]=>$data[1],"url"=>$data[2],"selected"=>$tmp);
+				print "\n\n -- 5554321--".$sql."----|--".var_export($data,true)."-|--\n\n";
+				
+				// below new
 				$dval=$data[1]." -> ".$data[2];
 				$app_data['domains'][]=array($data[0]=>$dval);
+				// end new
+
 				//echo"<option value='$data[0]' $tmp>$data[1] -> $data[2]</option>";
 				//print "\n\n -- 5554321--".$sql."----|--".var_export($data,true)."-|--\n\n";
 			};
@@ -287,24 +301,27 @@
 	try{
 		//print "\n\n -- 5551234--".$sql."\n\n";
 		$r->Initialise_Remote_Server(true);
-		if($_SESSION["SU"]=="CWL"){ 
-			$sql="SELECT id,Name FROM clients ORDER BY Name";
-			
-			$rslt=$r->RawQuery($sql);
-			
-			$client_count=$r->NumRows($rslt);
-			//print "\n\n -- 555123456--".$client_count."\n\n";
-			if($client_count>0){
-				while($data=$r->Fetch_Array($rslt)){
-					//$tmp=($data[0]==$_SESSION['clientsID'] ? true : false);
-					//$app_data['clients'][]=array($data[0]=>$data[1],"selected"=>$tmp);
-					$app_data['clients'][]=array($data[0]=>$data[1]);
-					//echo"<option value='$data[0]' $tmp>$data[1]</option>";
-				};
+		if(isset($_SESSION["SU"])){
+			if($_SESSION["SU"]=="CWL"){ 
+				$sql="SELECT id,Name FROM clients ORDER BY Name";
+				
+				$rslt=$r->RawQuery($sql);
+				
+				$client_count=$r->NumRows($rslt);
+				//print "\n\n -- 555123456--".$client_count."\n\n";
+				if($client_count>0){
+					while($data=$r->Fetch_Array($rslt)){
+						//$tmp=($data[0]==$_SESSION['clientsID'] ? true : false);
+						//$app_data['clients'][]=array($data[0]=>$data[1],"selected"=>$tmp);
+						$app_data['clients'][]=array($data[0]=>$data[1]);
+						//echo"<option value='$data[0]' $tmp>$data[1]</option>";
+					};
+				}
+				//print "\n\n -- 1234555123456--n\n";
+				//print_r($app_data);
 			}
-			//print "\n\n -- 1234555123456--n\n";
-			//print_r($app_data);
 		}
+		
 	}catch(Exception $e){
 		//print_r($e);
 	}

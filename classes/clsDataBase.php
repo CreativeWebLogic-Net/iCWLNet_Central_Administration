@@ -227,11 +227,12 @@
 				$this->server_name=$this->m->server_name;
 				//$result =$this->test_mysql();
 				//echo"\n\n 321-------------------".var_export($result,true)."----------------------------------------------------------\n\n";
+				/*
 				$query = "SELECT * FROM administrators";
 				$result =$this->rawQuery($query,$link);
 				$row = $this->Fetch_Assoc($result);
-				//echo"\n\n 43210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
-				
+				echo"\n\n 43210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
+				*/
 				/*
 				$res = pg_query("SELECT * FROM administrators");
 				
@@ -291,6 +292,7 @@
 		//-----------------------------------------------------------------------------------------------------------
 		public function Set_Current_Server($Domain_Name){
 			//$this->links[$TArr]
+			$data=array();
 			$sql="SELECT username AS usernamedb,password AS passworddb,dbname,Main_Url AS hostname";
 			$sql.=" ,servers.Name AS server_desc,servers.id AS server_number,ServerName As server_tag ";
 			$sql.=" FROM domains,servers,servers_databases WHERE domains.serversID=servers.id AND ";
@@ -300,46 +302,47 @@
 			$rslt=$this->rawQuery($sql);
 			$data=$this->Fetch_Assoc($rslt);
 			//echo"9991----------------------------".var_export($data,true)."-------------------------------------------------\n\n";
-			echo"9992-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
+			//echo"9992-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
 			
-			print_r($data);
-			echo"999210-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
-			
-			if(count($data)>0){
-				$this->DBFile=$data["server_tag"];
-				$this->current_link=$this->DBFile;
-				if(isset($this->server_login[$data["server_tag"]])){
-					$server_login[$this->$DBFile]=$this->server_login[$this->$DBFile];
-				}else{
-					//$DB=array();$data
-					$DB=$data;
-					/*
-					$DB['hostname']=$data["Main_Url"];
-					$DB['usernamedb']=$data["username"];
-					$DB['passworddb']=$data["password"];
-					$DB['dbName']=$data["dbname"];
-					$DB['server_tag']=$data["ServerName"];
-					$DB['server_desc']=$data["server_desc"];
-					$DB['server_number']=$data["server_number"];
-					$DB['current_dir']="./";
-					*/
-					$DB['current_dir']="./";
-					$DB['dbNames']=array();
-					$server_login[$DB['server_tag']]=array('server_tag'=>$DB['server_tag'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],'server_desc'=>$DB['server_desc'],'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],'hostname'=>$DB['hostname'],'dbName'=>$DB['dbname'],'dbNames'=>$DB['dbNames']);
-					$this->server_login=$server_login;
+			//print_r($data);
+			//echo"999210-----------".$Domain_Name."-----------------".$sql."-------------------------------------------------\n\n";
+			if(is_array($data)){
+				if(count($data)>0){
+					$this->DBFile=$data["server_tag"];
+					$this->current_link=$this->DBFile;
+					if(isset($this->server_login[$data["server_tag"]])){
+						$server_login[$this->$DBFile]=$this->server_login[$this->$DBFile];
+					}else{
+						//$DB=array();$data
+						$DB=$data;
+						/*
+						$DB['hostname']=$data["Main_Url"];
+						$DB['usernamedb']=$data["username"];
+						$DB['passworddb']=$data["password"];
+						$DB['dbName']=$data["dbname"];
+						$DB['server_tag']=$data["ServerName"];
+						$DB['server_desc']=$data["server_desc"];
+						$DB['server_number']=$data["server_number"];
+						$DB['current_dir']="./";
+						*/
+						$DB['current_dir']="./";
+						$DB['dbNames']=array();
+						$server_login[$DB['server_tag']]=array('server_tag'=>$DB['server_tag'],'usernamedb'=>$DB['usernamedb'],'passworddb'=>$DB['passworddb'],'server_desc'=>$DB['server_desc'],'current_dir'=>$DB['current_dir'],'server_number'=>$DB['server_number'],'hostname'=>$DB['hostname'],'dbName'=>$DB['dbname'],'dbNames'=>$DB['dbNames']);
+						$this->server_login=$server_login;
+						
+					}
 					
-				}
-				
-				//-----------------------------------------------------------------------------------------------------------
-				echo"9991----------------------------".var_export($this->server_login,true)."-------------------------------------------------\n\n";
-					
-				$this->m->Initialise_Remote_Server($server_login[$this->DBFile]);
-				//$this->links[$this->DBFile] = $this->m->Connect($this->DBFile);
-				$this->links = $this->m->Connect($this->DBFile);
-				if(isset($this->links->connect_error)) {
-					$this->log->general("Connection failed: " . $this->links->connect_error,3);
-				}else{
-					$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
+					//-----------------------------------------------------------------------------------------------------------
+					//echo"9991----------------------------".var_export($this->server_login,true)."-------------------------------------------------\n\n";
+						
+					$this->m->Initialise_Remote_Server($server_login[$this->DBFile]);
+					//$this->links[$this->DBFile] = $this->m->Connect($this->DBFile);
+					$this->links = $this->m->Connect($this->DBFile);
+					if(isset($this->links->connect_error)) {
+						$this->log->general("Connection failed: " . $this->links->connect_error,3);
+					}else{
+						$this->log->general("m->Connection Success: ".var_export($this->links,true),1);
+					}
 				}
 			}
 			
@@ -521,7 +524,7 @@
 			}
 			
 			try{
-				echo"9123---rawQuery------------------------|-".$query."-|-------|-".$this->current_db_type."-|---------------------------------------\n\n";
+				//echo"9123---rawQuery------------------------|-".$query."-|-------|-".$this->current_db_type."-|---------------------------------------\n\n";
 				$this->SQL=$query;
 				if($link){
 					//echo"999----------------------------".var_export($links,true)."-------------------------------------------------\n\n";
@@ -533,7 +536,9 @@
 						$result = $link->query($query);
 						//echo"454------------test_mysql_db_resul-----------------------------------------------------------------";
 						//$this->test_mysql_db_result($result);
-						
+						$row = $this->Fetch_Assoc($result);
+						//echo"\n\n 43210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
+				
 					}elseif($this->current_db_type=="Sqlite"){
 						//echo"454-----------------------------------------------------------------------------";
 					}
@@ -548,7 +553,7 @@
 				}else{
 					//echo"999----------------------------".var_export($result,true)."-------------------------------------------------\n\n";
 			
-					return $result;
+					//return $result;
 				}
 				
 			}catch(Exception $e){
@@ -569,41 +574,43 @@
 			}
 			$link=$this->Get_Links();
 			$num_rows=0;
-			try{
-				//$this->log->general("Start Num Rows->",3);
+			if($result){
+				try{
+					//$this->log->general("Start Num Rows->",3);
+					
+					//$this->log->general("Row Count->".$num_rows,3);
+					//$this->log->general("\n",3);
+					$num_rows=0;
+					if($this->current_db_type=="MySQL"){
+						$this->log->general("Connection failed: " . $link->connect_error,3);
+						$this->log->general("m->Connection Success: ".var_export($link,true),1);
+						//$this->result->reset();
+						$num_rows=$result->num_rows;
+						//echo"9875654321-----------------%-".$num_rows."-%--|--".$this->SQL."--|----------------------------------------------------\n\n";
 				
-				//$this->log->general("Row Count->".$num_rows,3);
-				//$this->log->general("\n",3);
-				$num_rows=0;
-				if($this->current_db_type=="MySQL"){
-					$this->log->general("Connection failed: " . $link->connect_error,3);
-					$this->log->general("m->Connection Success: ".var_export($link,true),1);
-					//$this->result->reset();
-					$num_rows=$result->num_rows;
-					//echo"9875654321-----------------%-".$num_rows."-%--|--".$this->SQL."--|----------------------------------------------------\n\n";
-			
-				}elseif($this->current_db_type=="Sqlite"){
-					
-					//$this->num_rows=$this->result->num_rows;
-					$result->reset();
-					$nrows = 0;
-					
-					while ($this->Fetch_Array($result)){
-						$nrows++;
-					}
+					}elseif($this->current_db_type=="Sqlite"){
 						
-					$result->reset();
-					$num_rows=$nrows;
-					//return $nrows;
-				}elseif($this->current_db_type=="pgSQL"){
-					$num_rows = pg_num_rows($result);
+						//$this->num_rows=$this->result->num_rows;
+						$result->reset();
+						$nrows = 0;
+						
+						while ($this->Fetch_Array($result)){
+							$nrows++;
+						}
+							
+						$result->reset();
+						$num_rows=$nrows;
+						//return $nrows;
+					}elseif($this->current_db_type=="pgSQL"){
+						$num_rows = pg_num_rows($result);
+					}
+					
+					//echo"454-----------------%-".$this->num_rows."-%----------------------------------------------------------";
+					
+				}catch(Exception $e){
+					$this->log->general("MySQL NumRows Exception->".var_export($e,true)." ".$this->SQL,3);
+					return 0;
 				}
-				
-				//echo"454-----------------%-".$this->num_rows."-%----------------------------------------------------------";
-				
-			}catch(Exception $e){
-				$this->log->general("MySQL NumRows Exception->".var_export($e,true)." ".$this->SQL,3);
-				return 0;
 			}
 			//////echo"98756543210-----------------%-".$num_rows."-%---------------|--".$this->SQL."--|-------------------------------------------\n\n";
 				
@@ -668,6 +675,8 @@
 					$row =pg_fetch_array($result);
 				}
 			}
+			//echo"\n\n 9943210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
+				
 			return $row;
 			
 		}
@@ -688,6 +697,8 @@
 				}
 			}
 			//echo"2233----------------------------------------------------------|-".var_export($row,true)."-|-----------------";
+			//echo"\n\n 19943210----------".var_export($result,true)."-------------".var_export($row,true)."----------------------------------------------------------\n\n";
+			
 			return $row;
 		}
 

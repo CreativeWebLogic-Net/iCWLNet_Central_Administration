@@ -13,7 +13,7 @@
 	$sidebar_data=array();
 	$news_data=array();
 	//----------------------------------static asset files------------------------------
-	$app_data['asset_server_number']=9;
+	$app_data['asset_server_number']=10;
 	$app_data['asset-severs'][0]='https://sitemanage.info/main/assets/'; // digital ocean custom server
 	$app_data['asset-severs'][1]='https://spaces.auseo.net/'; // digital ocean custom server
 	$app_data['asset-severs'][2]='https://static-cms.nyc3.cdn.digitaloceanspaces.com/'; // digital ocean cdn server
@@ -23,8 +23,8 @@
 	$app_data['asset-severs'][6]='https://assets.icwl.me/'; //hostgator reseller server
 	$app_data['asset-severs'][7]='https://static-assets.w-d.biz/'; //cloud unlimited server
 	$app_data['asset-severs'][8]='https://assets.i-n.club/'; //ionos unlimited server
-	$app_data['asset-severs'][9]='https://assets.creativeweblogic.net'; //ionos unlimited server
-	$app_data['asset-severs'][10]='https://assets.creativeweblogic.net'; //ionos unlimited server
+	$app_data['asset-severs'][9]='http://assets.creativeweblogic.net'; //ionos unlimited server
+	$app_data['asset-severs'][10]='https://static-assets.site'; //ionos unlimited server
 
 	$app_data['asset-sever']=$app_data['asset-severs'][$app_data['asset_server_number']];
 	//----------------------------------------------------------------
@@ -51,6 +51,7 @@
 	include($app_data['INCLUDESDIR']."functions.inc.php");
 	include($app_data['CLASSESBASEDIR']."clsMail.php");
 	include($app_data['CLASSESBASEDIR'].'clsLogger.php');
+	//echo"<br>\n\n 00055666----------------------------|-|-------------------------------------------------\n\n";
 	
 	$log = new clsLog();
 	//$log = "";
@@ -64,7 +65,7 @@
 	$r->Add_App_Data($app_data);
 	$r->CreateDB();
 	//print_r($app_data);
-	
+	//echo"<br>\n\n 00055666001----------------------------|-|-------------------------------------------------\n\n";
 	
 	$log->general('Loading Create VS $r',1);
 	$r->Set_Vs($vs);

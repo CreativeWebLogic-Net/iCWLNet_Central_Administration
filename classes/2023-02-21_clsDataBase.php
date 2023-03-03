@@ -77,7 +77,7 @@
 		public function test_mysql($query=false){
 
 			include("classes/db.php");
-			//echo"43210-------------------|-".var_export($server_DB,true)."-|----------------------------------------------------------\n\n";
+			echo"43210-------------------|-".var_export($server_DB,true)."-|----------------------------------------------------------\n\n";
 			$DB=$server_DB;
 			$current_server_tag=$DB['server_tag'];
 			$server_desc=$DB['server_desc'];
@@ -423,7 +423,7 @@
 		//function rawQuery($query="",$links=false)
 		function rawQuery($query="",$links=false)
 		{
-			echo"\n\n 9-----------------------".$query."------------------------------------------------------\n\n";
+			echo"\n\n xxx-----------------------".$query."------------------------------------------------------\n\n";
 			
 			$result=false;
 			
