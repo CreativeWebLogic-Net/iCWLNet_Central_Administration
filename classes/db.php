@@ -15,8 +15,8 @@
         $DB['current_dir']="/var/www/html";
         $DB['server_number']=0;
         $DB['hostname']="localhost";
-        $DB['usernamedb']='cwy0ek0e_bubblel';
-        $DB['passworddb']='DickSux5841';
+        $DB['usernamedb']='username';
+        $DB['passworddb']='password';
         $DB['dbName']='bubblelite2';
         
     }
