@@ -1,0 +1,134 @@
+# Variables which should be replaced. Similar to grafana dashboards' __inputs section
+x-inputs:
+  - name: namespace
+    type: constant
+    value: zenko
+  - name: service
+    type: constant
+    value: artesca-data-connector-s3api-metrics
+  - name: replicas
+    type: constant
+  - name: systemErrorsWarningThreshold
+    type: config
+    value: 0.03
+  - name: systemErrorsCriticalThreshold
+    type: config
+    value: 0.05
+  - name: listingLatencyWarningThreshold
+    type: config
+    value: 0.300
+  - name: listingLatencyCriticalThreshold
+    type: config
+    value: 0.500
+  - name: deleteLatencyWarningThreshold
+    type: config
+    value: 0.500
+  - name: deleteLatencyCriticalThreshold
+    type: config
+    value: 1.000
+
+groups:
+- name: CloudServer
+  rules:
+
+  - alert: DataAccessS3EndpointDegraded
+    expr: sum(up{namespace="${namespace}", service="${service}"}) < ${replicas}
+    for:   "30s"
+    labels:
+      severity: warning
+    annotations:
+      description: "Less than 100% of S3 endpoints are up and healthy"
+      summary: "Data Access service is degraded"
+
+  - alert: DataAccessS3EndpointCritical
+    expr: sum(up{namespace="${namespace}", service="${service}"}) * 2 < ${replicas}
+    for:   "30s"
+    labels:
+      severity: critical
+    annotations:
+      description: "Less than 50% of S3 endpoints are up and healthy"
+      summary: "Data Access service is critical"
+
+  # As a platform admin I want to be alerted (warning) when the system errors are more than 3% of
+  # all the response codes
+  - alert: SystemErrorsWarning
+    expr: |
+      sum(rate(http_requests_total{namespace="${namespace}", service="${service}", code=~"5.."}[1m]))
+          / sum(rate(http_requests_total{namespace="${namespace}", service="${service}"}[1m]))
+        >= ${systemErrorsWarningThreshold}
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: "System errors represent more than 3% of all the response codes"
+      summary: "High ratio of system erors"
+
+  # As a platform admin I want to be alerted (critical) when the system errors are more than 5% of
+  # all the response codes
+  - alert: SystemErrorsCritical
+    expr: |
+      sum(rate(http_requests_total{namespace="${namespace}", service="${service}", code=~"5.."}[1m]))
+          / sum(rate(http_requests_total{namespace="${namespace}", service="${service}"}[1m]))
+        >= ${systemErrorsCriticalThreshold}
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      description: "System errors represent more than 5% of all the response codes"
+      summary: "Very high ratio of system erors"
+
+  # As a platform admin I want to be alerted (warning) when a listing operation latency or a
+  # version listing operation latency is more than 300ms
+  - alert: ListingLatencyWarning
+    expr: |
+      sum(rate(http_request_duration_seconds_sum{namespace="${namespace}",service="${service}",action="listBucket"}[1m]))
+          / sum(rate(http_request_duration_seconds_count{namespace="${namespace}",service="${service}",action="listBucket"}[1m]))
+        >= ${listingLatencyWarningThreshold}
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: "Latency of listing or version listing operations is more than 300ms"
+      summary: "High listing latency"
+
+  # As a platform admin I want to be alerted (critical) when a listing operation latency or a
+  # version listing operation latency is more than 500ms
+  - alert: ListingLatencyCritical
+    expr: |
+      sum(rate(http_request_duration_seconds_sum{namespace="${namespace}",service="${service}",action="listBucket"}[1m]))
+          / sum(rate(http_request_duration_seconds_count{namespace="${namespace}",service="${service}",action="listBucket"}[1m]))
+        >= ${listingLatencyCriticalThreshold}
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      description: "Latency of listing or version listing operations is more than 500ms"
+      summary: "Very high listing latency"
+
+  # As a platform admin I want to be alerted (warning) when a delete operation latency is more than
+  # 500ms
+  - alert: DeleteLatencyWarning
+    expr: |
+      sum(rate(http_request_duration_seconds_sum{namespace="${namespace}",service="${service}",action="deleteObject"}[1m]))
+          / sum(rate(http_request_duration_seconds_count{namespace="${namespace}",service="${service}",action="deleteObject"}[1m]))
+        >= ${deleteLatencyWarningThreshold}
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: "Latency of delete object operations is more than 500ms"
+      summary: "High delete latency"
+
+  # As a platform admin I want to be alerted (critical) when a delete operation latency is more
+  # than 1s
+  - alert: DeleteLatencyCritical
+    expr: |
+      sum(rate(http_request_duration_seconds_sum{namespace="${namespace}",service="${service}",action="deleteObject"}[1m]))
+          / sum(rate(http_request_duration_seconds_count{namespace="${namespace}",service="${service}",action="deleteObject"}[1m]))
+        >= ${deleteLatencyCriticalThreshold}
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      description: "Latency of delete object operations is more than 1s"
+      summary: "Very high delete latency"

@@ -1,0 +1,158 @@
+<?php
+	include("../../Admin_Start_Include.php");
+	
+	include("functions.inc.php");
+	if($_GET['Parent']){
+		$Parent=$_GET['Parent'];
+	}elseif($_POST['Parent']){
+		$Parent=$_POST['Parent'];
+	}else{
+		$Parent=0;
+	};
+	
+	if($_GET['field_name']) $_SESSION['field_name']=$_GET['field_name'];
+	if($_GET['type']) $_SESSION['type']=$_GET['type'];
+	
+	if($_POST['Delete']){
+		if(is_array($_POST['Items'])){
+			foreach($_POST['Items'] as $ItemID){
+				DeleteAsset($ItemID);
+			}
+			$Message="Assets Deleted";
+		}
+		if(is_array($_POST['Folders'])){
+			foreach($_POST['Folders'] as $FolderID){
+				DeleteAssetFolder($FolderID);
+			}
+			$Message.="/ Folders Deleted";
+		}
+	}
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Asset Manager</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../../css/backend.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
+<script>
+<!--
+function Return(url){
+		//alert(url);
+		//window.opener.CallBackReturn("<?php print $_SESSION['field_name'];?>", "http://<?php print $_SERVER['HTTP_HOST'];?>/assets/<?php print $Parent;?>/"+url);
+		window.opener.CallBackReturn("<?php print $_SESSION['field_name'];?>", "/assets/<?php print $Parent;?>/"+url);
+		window.close();
+	}
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+<style type="text/css">
+<!--
+.style1 {color: #FFFFFF}
+.style3 {color: #FFFFFF; font-weight: bold; }
+body {
+	background-color: #FFFFFF;
+}
+-->
+</style>
+</head>
+
+<body>
+<form name="form1" method="post" action="assets.php">
+  <table width="61%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><img src="../../images/contentTop.gif" width="606" height="17" /></td>
+    </tr>
+    <tr>
+      <td class="box"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr align="center">
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr align="center">
+          <td width="51%"><a href="javascript: MM_openBrWindow('create-folder.php?Parent=<?php print $Parent;?>','InsertFolder','width=630,height=200')" >Insert Folder</a></td>
+          <td width="49%"><?php
+	  	if($Parent!=0){
+	  ?>
+              <a href="javascript: MM_openBrWindow('upload-file.php?Parent=<?php print $Parent;?>','InsertFolder','width=630,height=300')" >Insert File</a>
+              <?php
+	  	};
+	  ?>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">Path : <a href="assets.php?Parent=0">Root</a>
+              <?php printShowPath($Parent,$ClientsID,"assets.php");?></td>
+        </tr>
+        
+      </table></td>
+    </tr>
+    <tr>
+      <td><img src="../../images/contentFooter.gif" width="606" height="12" /></td>
+    </tr>
+  </table>
+  <input name="Parent" type="hidden" id="Parent" value="<?php print $Parent;?>">
+  <br>
+  <table width="604" border="0" cellpadding="3" cellspacing="1" id="table">
+    <tr bgcolor="#363E57">
+      <td class="tableHeaders"><input name="Delete" type="submit"  class="formbuttons" id="Submit" onClick="return confirmSubmit()" value="Delete"></td>
+      <td width="64" class="tableHeaders">Select</td>
+      <td width="182"  class="tableHeaders"><strong>Name</strong></td>
+      <td width="268"  class="tableHeaders"><strong>Description</strong></td>
+    </tr>
+    <?php
+					  	$Count=0;
+					 	$sq2=$r->rawQuery("SELECT id,Name FROM assetfolders WHERE ClientsID='1' AND Parent='$Parent'");  
+						while ($myrow = $r->Fetch_Array($sq2)) {
+							
+								$Count++;
+						?>
+    <tr bgcolor="<?php print(($Count%2)==0 ? "#CCCCCC" : "#999999"); ?>">
+      <td width="61" ><input name="Folders[]" type="checkbox" id="Folders[]" value="<?php print $myrow[0];?>"></td>
+      <td align="center" ><a href="assets.php?Parent=<?php print $myrow[0];?>"><img src="images/folder.gif" width="16" height="15" border="0" title="Folder"></a></td>
+      <td><?php print $myrow[1];?></td>
+      <td >&nbsp;</td>
+    </tr>
+    <?php
+					  		
+						};
+					  ?>
+    <?php
+					  
+					 	$sq2=$r->rawQuery("SELECT id,Filename,Description FROM assets WHERE AssetFoldersID='$Parent'");  
+						while ($myrow = $r->Fetch_Array($sq2)) {
+							$Count++;
+						?>
+    <tr bgcolor="<?php print(($Count%2)==0 ? "#CCCCCC" : "#999999"); ?>">
+      <td><input type="checkbox" name="Items[]" value="<?php print $myrow[0];?>"></td>
+      <td align="center"><a href="javascript:Return('<?php print $myrow[1];?>')"><img src="images/item.gif" border="0" title="File"></a></td>
+      <td><a href="/assets/<?php print $Parent;?>/<?php print $myrow[1];?>" target="_blank"><?php print $myrow[1];?></a></td>
+      <td><?php print $myrow[2];?></td>
+    </tr>
+    <?php
+					  		
+						};
+					  ?>
+  </table>
+</form>
+</body>
+</html>

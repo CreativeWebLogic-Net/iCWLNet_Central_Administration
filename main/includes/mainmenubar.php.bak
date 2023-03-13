@@ -1,0 +1,49 @@
+<?php
+	$show_su_menu=false;
+	if(isset($_SESSION["SU"])){
+		if($_SESSION["SU"]=="CWL"){	
+			$show_su_menu=true;
+		}
+	}
+	if($show_su_menu){
+?>
+<div id="MainMenuManagement">
+    <div id="ManagementMainMenu">
+        <a href="../logged-in/index.php"><span>HOME</span></a> 
+        | <a href="../members/modify.php"><span>MEMBERS</span></a> <?php };?>
+        | <a href="../pages/modify.php"><span>PAGES</span></a> 
+       | <a href="../news/modify.php"><span>NEWS</span></a> <?php };?>
+        | <a href="../banner-adverts/modify.php"><span>BANNERS</span></a> <?php };?>
+        | <a href="../setup/index.php"><span>SETUP</span></a> 
+        | <a href="../../logout.php"><span>LOG OUT</span></a>
+        
+    </div>
+</div>
+
+
+<?php	
+	}else{
+	
+		//print_r($_SESSION['ModsPermArr']);
+		if(isset($_SESSION['ModsPermArr'])){
+?>
+
+<div id="MainMenuManagement">
+    <div id="ManagementMainMenu">
+        <a href="../logged-in/index.php"><span>HOME</span></a> 
+        <?php if(in_array(2,$_SESSION['ModsPermArr'])){?>| <a href="../members/modify.php"><span>MEMBERS</span></a> <?php };?>
+        | <a href="../pages/modify.php"><span>PAGES</span></a> 
+        <?php if(in_array(3,$_SESSION['ModsPermArr'])){?>| <a href="../news/modify.php"><span>NEWS</span></a> <?php };?>
+        <?php if(in_array(560,$_SESSION['ModsPermArr'])){?>| <a href="../banner-adverts/modify.php"><span>BANNERS</span></a> <?php };?>
+        | <a href="../setup/index.php"><span>SETUP</span></a> 
+        | <a href="../../logout.php"><span>LOG OUT</span></a>
+        
+    </div>
+</div>
+
+<?php
+			}else{
+				$_SESSION['ModsPermArr']="";
+			}
+	}
+?>

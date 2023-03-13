@@ -1,0 +1,189 @@
+
+{
+    "legacy": {
+        "type": "mem",
+        "objectId": "legacy",
+        "legacyAwsBehavior": false,
+        "details": {}
+    },
+    "us-east-1": {
+        "type": "file",
+        "objectId": "us-east-1",
+        "legacyAwsBehavior": true,
+
+        "details": {}
+    },
+    "us-east-2": {
+        "type": "file",
+        "objectId": "us-east-2",
+        "legacyAwsBehavior": true,
+        "details": {}
+    },
+    "scality-internal-file": {
+        "type": "file",
+        "objectId": "scality-internal-file",
+        "legacyAwsBehavior": false,
+        "details": {}
+    },
+    "dataFile": {
+        "type": "file",
+        "objectId": "dataFile",
+        "legacyAwsBehavior": false,
+        "details": {}
+    },
+    "scality-internal-mem": {
+        "type": "mem",
+        "objectId": "scality-internal-mem",
+        "legacyAwsBehavior": false,
+        "details": {}
+    },
+    "scality-us-west-1": {
+        "type": "mem",
+        "objectId": "scality-us-west-1",
+        "legacyAwsBehavior": false,
+        "details": {}
+    },
+    "awsbackendencryption": {
+        "type": "aws_s3",
+        "objectId": "awsbackendencryption",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": true,
+            "credentialsProfile": "default",
+            "serverSideEncryption": true
+        }
+    },
+    "awsbackend": {
+        "type": "aws_s3",
+        "objectId": "awsbackend",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": true,
+            "credentialsProfile": "default"
+        }
+    },
+    "awsbackendmismatch": {
+        "type": "aws_s3",
+        "objectId": "awsbackendmismatch",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": false,
+            "credentialsProfile": "default"
+        }
+    },
+    "awsbackendhttp": {
+        "type": "aws_s3",
+        "objectId": "awsbackendhttp",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": true,
+            "credentialsProfile": "default",
+            "https": false
+        }
+    },
+    "awsbackend2": {
+        "type": "aws_s3",
+        "objectId": "awsbackend2",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester222",
+            "bucketMatch": true,
+            "credentialsProfile": "default_2"
+        }
+    },
+    "azurebackend": {
+        "type": "azure",
+        "objectId": "azurebackend",
+        "legacyAwsBehavior": true,
+        "details": {
+            "azureStorageEndpoint": "https://fakeaccountname.blob.core.fake.net/",
+            "azureStorageAccountName": "fakeaccountname",
+            "azureStorageAccessKey": "Fake00Key001",
+            "bucketMatch": true,
+            "azureContainerName": "s3test"
+        }
+    },
+    "azurebackend2": {
+        "type": "azure",
+        "objectId": "azurebackend2",
+        "legacyAwsBehavior": true,
+        "details": {
+            "azureStorageEndpoint": "https://fakeaccountname2.blob.core.fake.net/",
+            "azureStorageAccountName": "fakeaccountname2",
+            "azureStorageAccessKey": "Fake00Key002",
+            "bucketMatch": true,
+            "azureContainerName": "s3test2"
+        }
+    },
+    "azurebackendmismatch": {
+        "type": "azure",
+        "objectId": "azurebackendmismatch",
+        "legacyAwsBehavior": true,
+        "details": {
+            "azureStorageEndpoint": "https://fakeaccountname.blob.core.fake.net/",
+            "azureStorageAccountName": "fakeaccountname",
+            "azureStorageAccessKey": "Fake00Key001",
+            "bucketMatch": false,
+            "azureContainerName": "s3test"
+        }
+    },
+    "gcpbackend": {
+        "type": "gcp",
+        "objectId": "gcpbackend",
+        "legacyAwsBehavior": true,
+        "details": {
+            "gcpEndpoint": "storage.googleapis.com",
+            "bucketName": "zenko-gcp-bucket",
+            "mpuBucketName": "zenko-gcp-mpu",
+            "bucketMatch": true,
+            "credentialsProfile": "google"
+        }
+    },
+    "withversioning": {
+        "type": "aws_s3",
+        "objectId": "withversioning",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": true,
+            "credentialsProfile": "default",
+            "supportsVersioning": true
+        }
+    },
+    "withoutversioning": {
+        "type": "aws_s3",
+        "objectId": "withoutversioning",
+        "legacyAwsBehavior": true,
+        "details": {
+            "awsEndpoint": "s3.amazonaws.com",
+            "bucketName": "multitester555",
+            "bucketMatch": true,
+            "credentialsProfile": "default",
+            "supportsVersioning": false
+        }
+    },
+    "transientfile": {
+        "type": "file",
+        "objectId": "transientfile",
+        "legacyAwsBehavior": false,
+        "details": {},
+        "isTransient": true
+    },
+    "location-dmf-v1": {
+        "type": "dmf",
+        "objectId": "location-dmf-v1",
+        "legacyAwsBehavior": false,
+        "isCold": true,
+        "details": {}
+    }
+}
