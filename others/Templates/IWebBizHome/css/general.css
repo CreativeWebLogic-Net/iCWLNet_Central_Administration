@@ -1,0 +1,84 @@
+
+.footer a:link {
+	font-family: arial;
+	font-size: 11px;
+	color: #FFFFFF;
+
+}
+
+.footer a:visited {
+	font-family: arial;
+	font-size: 11px;
+	color: #FFFFFF;
+
+}
+.footer a:hover {
+	font-family: arial;
+	font-size: 11px;
+	color: #000000;
+
+}
+.footer a:active {
+	font-family: arial;
+	font-size: 11px;
+	color: #FFFFFF;
+
+}
+.content {
+	font-family: arial;
+	color: #4b4b4b;
+	font-size: 12px;
+	padding-top: 0px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+.content a:link {
+	font-family: arial;
+	color: #82A51A;
+	font-size: 12px;
+	font-weight: bold;
+
+}
+
+.content a:visited {
+	font-family: arial;
+	color: #82A51A;
+	font-size: 12px;
+	font-weight: bold;
+
+}
+.content a:hover {
+	font-family: arial;
+	color: #4b4b4b;
+	font-size: 12px;
+	font-weight: bold;
+
+}
+.content a:active {
+	font-family: arial;
+	color: #82A51A;
+	font-size: 12px;
+	font-weight: bold;
+
+}
+.titeText {
+	font-family: arial;
+	font-size: 18px;
+	font-weight: bold;
+	color: #88A624;
+}
+.contactBox {
+	padding: 5px;
+	border: 1px solid #CCCCCC;
+	font-family: arial;
+	font-size: 12px;
+	color: #999999;
+}
+.contactBoxCopy {
+	padding: 0px;
+	border: 1px solid #CCCCCC;
+	font-family: arial;
+	font-size: 12px;
+	color: #999999;
+}

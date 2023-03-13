@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+.Main_Menu_Links a:link {
+	font-family: arial;
+	font-size: 11px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+.Main_Menu_Links a:visited {
+	font-family: arial;
+	font-size: 11px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+.Main_Menu_Links a:hover {
+	font-family: arial;
+	font-size: 11px;
+	color:#003399;
+	text-decoration: underline;
+}
+.Main_Menu_Links a:active {
+	font-family: arial;
+	font-size: 11px;
+	color:#FFFFFF;
+	text-decoration:none;
+}
+

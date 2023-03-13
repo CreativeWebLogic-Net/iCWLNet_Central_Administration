@@ -1,0 +1,275 @@
+.leftside{
+text-align:left;
+}
+
+.RedText {color:#FF0000;}
+
+.leftLinks {
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #245F8D;
+}
+.leftLinks a:link{
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #245F8D;
+}
+.leftLinks a:visited{
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #245F8D;
+}
+.leftLinks a:hover{
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666666;
+}
+.leftLinks a:active{
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #245F8D;
+}
+.leftLinks2 {
+	font-family: arial;
+	font-size: 10px;
+	font-weight: bold;
+	color: #1B4669;
+}
+.leftLinks2 a:link{
+	font-family: arial;
+	font-size: 10px;
+	font-weight: bold;
+	color: #1B4669;
+}
+.leftLinks2 a:visited{
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #1B4669;
+}
+.leftLinks2 a:hover{
+	font-family: arial;
+	font-size: 10px;
+	font-weight: bold;
+	color: #666666;
+}
+.leftLinks2 a:active{
+	font-family: arial;
+	font-size: 10px;
+	font-weight: bold;
+	color: #1B4669;
+}
+.left {
+	padding: 5px;
+}
+
+
+.loggedInBar {
+	font-family: arial;
+	font-size: 11px;
+	color: #000000;
+	background-image: url(../images/topBarLoggedIn.gif);
+	background-repeat: repeat-x;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.content {
+	font-family: arial;
+	font-size: 11px;
+	color: #333333;
+	background-image: url(../images/topshadow.gif);
+	background-repeat: repeat-x;
+	padding: 0px;
+}
+.box {
+	font-family: arial;
+	font-size: 12px;
+	color: #333333;
+	background-image: url(../images/contentGradient.gif);
+	background-repeat: repeat-x;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #BBBBBB;
+	border-left-color: #BBBBBB;
+	background-position: center top;
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+}
+.leftColumnHeader {
+	font-family: arial;
+	font-size: 12px;
+	color: #000000;
+	background-color: #F1F4F7;
+	background-image: url(../images/rightTop.gif);
+	background-repeat: repeat-x;
+}
+.leftColumnHeader a:link {
+	font-family: arial;
+	font-size: 12px;
+	color: #333333;
+}
+.leftColumnHeader a:visited {
+	font-family: arial;
+	font-size: 12px;
+	color: #333333;
+}
+.leftColumnHeader a:hover {
+	font-family: arial;
+	font-size: 12px;
+	color: #245F8D;
+}
+
+.rightcollumn {
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+.leftColumnHeader a:active {
+	font-family: arial;
+	font-size: 12px;
+	color: #333333;
+}
+.footer {
+	font-family: arial;
+	font-size: 12px;
+	color: #245F8D;
+	background-image: url(../images/footerBG.gif);
+	background-repeat: repeat-x;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.tableHeaders {
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #245F8D;
+}
+.contentHeading {
+	font-family: arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: #245F8D;
+}
+.leftColumnheader a:link {
+	font-family: arial;
+	font-size: 12px;
+	color: #333333;
+}
+
+.contentTableText {
+	font-family: arial;
+	font-size: 11px;
+	color: #333333;
+}
+
+/*===========================================MENU=====================================================*/
+/*font family for page. If you have another style sheet that sets font family, you can delete this rule*/
+div, td, p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/*Control DIV for expand all and collapse all links*/
+#p7TMctrl {
+	margin: 0 0 12px 0;
+	font-size: 10px;
+	display: block;
+	/*/*/display: block; /* hide from NN4*/
+}
+#p7TMctrl a:link {
+	/*color: #333333;*/
+	color: #363E57;
+}
+#p7TMctrl a:visited {
+	color: #333333;
+}
+#p7TMctrl a:hover {
+	color: #66CC00;
+}
+
+
+/*Sets line-height of all menuitems*/
+#p7TMnav {
+	/*/*/line-height: 1.5; /* */
+}
+
+/*second level menuitem divs on - Cascades to lower levels*/
+/*Sets left margin to 16px establishing a cascading indent*/
+#p7TMnav div div {
+	margin: 0 0 0 16px;
+}
+
+/*The Link style for top-level menuitems*/
+#p7TMnav div a {
+	color: #333333;
+	font-size: 10px;
+	font-weight: bold;
+	color: #363E57;
+	padding: 0;
+}
+#p7TMnav div a:visited {
+	color: #666666;
+}
+#p7TMnav div a:hover {
+	/*color: #66CC00;*/
+	color: #6979A3;
+}
+
+/*The Link style for second-level menuitems*/
+#p7TMnav div div a {
+	font-size: 10px;
+}
+
+/*The Link style for third-level menuitems and lower*/
+/*To set a specific style for the fourth level, add a div to the selector*/
+/*Fourth-level example syntax: p7TMnav div div div div a {declaration}*/
+#p7TMnav div div div a {
+	font-size: 10px;
+}
+
+/*rules programatically assigned to parent links when image-based plus and minus option is selected*/
+/*do not remove*/
+.p7plusmark {
+	background-repeat: no-repeat;
+	/*background-image:   url(../images/arrow2.gif); p7t_plus.gif */
+	background-position: 0 50%;
+	padding: 0 0 0 20px !important;
+}
+.p7minusmark {
+	background-repeat: no-repeat;
+	/*background-image:   url(../images/arrow2.gif); p7t_minus.gif */
+	background-position: 0 50%;
+	padding: 0 0 0 20px !important;
+}
+/*rule programatically assigned to child links when image-based plus and minus option is selected*/
+.p7defmark {
+	background-image:  none;
+	padding: 0 0 0 20px !important;
+}
+
+/*rules programatically assigned to page link correesponding to current page (You are Here)*/
+.p7currentmark {
+	font-weight: bold;
+	/*text-transform: uppercase;*/
+	margin: 0 0 0 20px;
+	color: #F2960D !important;/*#666666*/
+}
+#nolink a{
+	text-decoration: none;
+}
+#nolink a:hover{
+	text-decoration: underline;
+}
+.LogBox {
+	border: thin solid #000000;
+}

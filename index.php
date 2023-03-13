@@ -22,21 +22,28 @@
 		$data=$r->rawQuery($sql);
 		$sql="SELECT * FROM administrators where hash='".$_GET['hash']."' LIMIT 0,1";
 	}
+
+  //print_r($_POST);
 	
 	if(isset($_POST['Submit'])){
 		if($_POST['Submit']!=""){
 			$login=true;
 			//$r=new ReturnRecord();
 			$sql="SELECT * FROM administrators where username='$_POST[UserName]' and password='$_POST[Password]' AND administratorActive=1 LIMIT 0,1";
-			//print $sql;
+			print $sql;
 			
 		}
 	}
 
 	if($login){
+    echo"\n\n0000----------------------------||-------------------------------------------------\n\n";
 		$data=$r->rawQuery($sql);
+    print_r($data);
+    echo"\n\n0001----------------------------||-------------------------------------------------\n\n";
 		$dataarray=$r->Fetch_Array($data);
-		//print_r($dataarray);
+		print_r($dataarray);
+    echo"\n\n0002----------------------------||-------------------------------------------------\n\n";
+	
 		if(isset($dataarray[0])){
 			if($dataarray[0]>0){ //admin login ok
 				
@@ -81,7 +88,7 @@
 		}
 
 	}
-	print_r($app_data);
+	
 
 ?><html>
 <head>

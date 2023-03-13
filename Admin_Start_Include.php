@@ -1,9 +1,9 @@
 <?php	
-	ini_set( 'display_errors', '1' );
+	
 	//echo"0003----------------------------||-------------------------------------------------\n\n";
 	
 	session_start();
-	
+	ini_set( 'display_errors', '1' );
 	//echo"000----------------------------||-------------------------------------------------\n\n";
 					
 	
@@ -136,22 +136,27 @@
 		$LanguageCount=$r->NumRows($rslt);
 		//print "99008765----------|--".$LanguageCount."--|--\n<br>";
 		//for($x=0;$x<$LanguageCount;$x++){
-		while($data=$r->Fetch_Array($rslt)){
-			//print "8765----------|--".var_export($data,true)."--|--\n<br>";
-			//print_r($data);
-			//$data=$r->Fetch_Array();
-			//print "8765----------|--".var_export($data,true)."--|--\n<br>";
-			$LanguageName=$data[1];
-			if(!is_numeric($_SESSION['original_languagesID'])){
-				$_SESSION['original_languagesID']=$data[0];
-				//echo"--1111-\n\n";
-			} 
-			//$tmp=($data[0]==$_SESSION['languagesID'] ? "selected" : "");
-			//$tmp=($data[0]==$_SESSION['languagesID'] ? true : false);
-			$app_data['languages'][]=array($data[0]=>$LanguageName);
-			//echo"<option value='$data[0]' $tmp>$LanguageName</option>";
+		if($LanguageCount>0){
+			while($data=$r->Fetch_Array($rslt)){
+				//print "8765----------|--".var_export($data,true)."--|--\n<br>";
+				//print_r($data);
+				//$data=$r->Fetch_Array();
+				//print "\n\n8765----------|--".var_export($data,true)."--|--\n";
+				$LanguageName=$data[1];
+				if(!is_numeric($_SESSION['original_languagesID'])){
+					$_SESSION['original_languagesID']=$data[0];
+					//echo"--1111-\n\n";
+				} 
+				//$tmp=($data[0]==$_SESSION['languagesID'] ? "selected" : "");
+				//$tmp=($data[0]==$_SESSION['languagesID'] ? true : false);
+				$app_data['languages'][]=array($data[0]=>$LanguageName);
+				//echo"<option value='$data[0]' $tmp>$LanguageName</option>";
+			
+			};
+		}else{
+			//print "\n\n5678\n\n----------|--".var_export($data,true)."--|--\n\n\n";
+		}
 		
-		};
 	}catch(Exception $e){
 		//print_r($e);
 	}
@@ -278,7 +283,7 @@
 				}
 				//$tmp=($data[0]==$_SESSION['domainsID'] ? true : false);
 				//$app_data['domains'][]=array($data[0]=>$data[1],"url"=>$data[2],"selected"=>$tmp);
-				print "\n\n -- 5554321--".$sql."----|--".var_export($data,true)."-|--\n\n";
+				//print "\n\n -- 5554321--".$sql."----|--".var_export($data,true)."-|--\n\n";
 				
 				// below new
 				$dval=$data[1]." -> ".$data[2];
