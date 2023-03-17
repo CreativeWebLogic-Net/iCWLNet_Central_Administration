@@ -30,19 +30,20 @@
 			$login=true;
 			//$r=new ReturnRecord();
 			$sql="SELECT * FROM administrators where username='$_POST[UserName]' and password='$_POST[Password]' AND administratorActive=1 LIMIT 0,1";
-			print $sql;
+			//print $sql;
 			
 		}
 	}
 
 	if($login){
-    echo"\n\n0000----------------------------||-------------------------------------------------\n\n";
+    //echo"\n\n0000----------------------------||-------------------------------------------------\n\n";
 		$data=$r->rawQuery($sql);
-    print_r($data);
-    echo"\n\n0001----------------------------||-------------------------------------------------\n\n";
-		$dataarray=$r->Fetch_Array($data);
-		print_r($dataarray);
-    echo"\n\n0002----------------------------||-------------------------------------------------\n\n";
+   // print_r($data);
+    //echo"\n\n0001----------------------------||-------------------------------------------------\n\n";
+		//$dataarray=$r->Fetch_Array($data);
+    $dataarray=$r->Fetch_Array();
+		//print_r($dataarray);
+    //echo"\n\n0002----------------------------||-------------------------------------------------\n\n";
 	
 		if(isset($dataarray[0])){
 			if($dataarray[0]>0){ //admin login ok
@@ -83,6 +84,8 @@
 				$Message="Incorrect Username or Password";
 			};
 		}else{
+      //echo"\n\n0003-----|-".$sql."-|-------|-".var_export($data,true)."-|--------------------|-".var_export($dataarray,true)."-|------------------------------------------------0003-\n\n";
+	
 			$Message="Incorrect Username or Password";
 			
 		}
