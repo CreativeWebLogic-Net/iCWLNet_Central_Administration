@@ -20,13 +20,15 @@
     $rslt=$r->RawQuery($sql);
     $Insert_Id=$r->Insert_Id();
 
-    $hash=md5($_POST['UserName'].$_POST['password']);
+    $hash=md5($_POST['username'].$_POST['password']);
     $sql="INSERT INTO administrators (name,email,username,password,administratorActive,SU,clientsID,hash) VALUES  ('".$_POST['contact_name']."','".$_POST['email']."'";
-    $sql.=",'".$_POST['UserName']."','".$_POST['password']."','1','Yes','".$Insert_Id."','".$hash."')";
+    $sql.=",'".$_POST['username']."','".$_POST['password']."','1','Yes','".$Insert_Id."','".$hash."')";
     
     //print $sql;
-    $rslt=$r->RawQuery($sql);
-    //$Insert_Id=$r->Insert_Id();
+
+    //print_r($_POST);
+    $rslt=$r->RawQuery($sql); 
+    $AdministratorsID=$r->Insert_Id();
     //echo"10-----------------------------------------------------------".var_export($r,true)."------------------";
     if($_POST['subdomain']==""){
       $_POST['subdomain']=str_replace(" ","-",$client_name);
@@ -43,15 +45,19 @@
     
     $atd->Set_Vs($vs);
     $atd->AddPosts($_POST,$_FILES);
+    
    // echo"690-----------------------------------------------------------".var_export($r,true)."------------------";
     
     $atd->AddTable("users");
     //echo"691-----------------------------------------------------------".var_export($r,true)."------------------";
-    $FieldArray=array("clientsID"=>$Insert_Id,"STATUS"=>"New","administratorActive"=>0);
+    //$FieldArray=array("administratorsID"=>$AdministratorsID,"clientsID"=>$Insert_Id,"status"=>"New","administratorActive"=>0);
+    $FieldArray=array("administratorsID"=>$AdministratorsID,"clientsID"=>$Insert_Id,"status"=>"New");
     $atd->AddExtraFields($FieldArray);
+    //$atd->AddSkip(array("administratorActive"));
     $atd->DoStuff();
     $NewID=$atd->ReturnID();
-
+    /* 2023-03-20
+    2023-03-20 */
     $econtent="\n\n Welcome to iCWLNet website builder. \n";
     $econtent.="You must activate your account. Please follow the below link \n";
     $econtent.="https://sitemanage.info/index.php?hash=".$hash." \n";
@@ -196,7 +202,7 @@ function YY_checkform() { //v4.71
               </tr>
               <tr>
                 <td width="163" class="tabletitle"><strong> Business Name<span class="RedText">*</span></strong></td>
-                <td width="352" class="tablewhite"><input name="name" type="text" id="name" size="45"></td>
+                <td width="352" class="tablewhite"><input name="business_name" type="text" id="name" size="45"></td>
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Contact Name</strong></td>
@@ -208,11 +214,11 @@ function YY_checkform() { //v4.71
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Address 1</strong></td>
-                <td class="tablewhite"><input name="address2" type="text" id="address" size="45"></td>
+                <td class="tablewhite"><input name="address" type="text" id="address" size="45"></td>
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Address 2</strong></td>
-                <td class="tablewhite"><input name="address" type="text" id="address" size="45"></td>
+                <td class="tablewhite"><input name="address2" type="text" id="address" size="45"></td>
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Address 3</strong></td>
@@ -236,7 +242,7 @@ function YY_checkform() { //v4.71
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Country</strong></td>
-                <td class="tablewhite"><SELECT NAME="countryID" id="countryID">
+                <td class="tablewhite"><select name="countryID" id="countryID">
                   <?php
 					  	$Count=0;
 					 //	$r=new ReturnRecord();
@@ -268,7 +274,7 @@ function YY_checkform() { //v4.71
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Username:</strong> </td>
-                <td class="tablewhite"><input name="UserName" type="text" id="UserName" size="45"></td>
+                <td class="tablewhite"><input name="username" type="text" id="UserName" size="45"></td>
               </tr>
               <tr>
                 <td class="tabletitle"><strong>Password</strong></td>

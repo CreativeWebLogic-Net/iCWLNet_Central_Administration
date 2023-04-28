@@ -1,5 +1,8 @@
 <?php
 	include("../../Admin_Start_Include.php");
+
+//print_r($app_data['domains']);
+
 	$app_data['delete_domain']=array();
 	if(isset($_POST['Delete'])){
 		if($_POST['Delete']=="Delete"){
@@ -251,19 +254,19 @@ function YY_checkform() { //v4.71
                 $drop_array=$app_data['domains'];
                 //print_r($drop_array);
                 foreach($drop_array as $key=>$val){
-                  foreach($val as $key2=>$val2){
+                  //foreach($val as $key2=>$val2){
                     //$tmp=($key2==$selected_key ? "selected" : "");
                     //echo"<option value='".$key2."' ".$tmp.">".$val2."</option>";
                     $output.='<tr class="'."\n";
                     $op=(($Count%2)==0 ? "row1" : "row2");
                     $output.=$op;
-                    $output.='"><td>'.$val2.'</td>'."\n";
-                    $output.='<td align="center"><a href="modify-edit.php?id='.$key2.'">'."\n";
+                    $output.='"><td>'.$val['title'].'</td>'."\n";
+                    $output.='<td align="center"><a href="modify-edit.php?id='.$val['id'].'">'."\n";
                     $output.='<img src="../../images/modify.gif" width="47" height="16" border="0"></a></td>'."\n";
-                    $output.='<td><div align="center"><input type="checkbox" name="DFiles[]" value="'.$key2.'">'."\n";
+                    $output.='<td><div align="center"><input type="checkbox" name="DFiles[]" value="'.$val['id'].'">'."\n";
                     $output.='</div></td></tr>'."\n";
                     $Count++;
-                  }
+                  //}
                 }
                 print $output;
               }

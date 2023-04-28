@@ -269,7 +269,7 @@
 
 		public function Initialise_Remote_Server($original=false){
 			//echo"\n\n 54321-----------------------------------------------------------------------------\n\n";
-			$this->m->Initialise_Remote_Server(array(),true);
+			//$this->m->Initialise_Remote_Server(array(),true);
 			/*
 			if($original){
 				$this->current_server_tag=$this->original_server_tag;
@@ -341,6 +341,7 @@
 					
 					//-----------------------------------------------------------------------------------------------------------
 					//echo"9991----------------------------".var_export($this->server_login,true)."-------------------------------------------------\n\n";
+					/*  2023-04-03
 					if($server_found){
 						$this->m->Initialise_Remote_Server($server_login[$this->DBFile]);
 						//$this->links[$this->DBFile] = $this->m->Connect($this->DBFile);
@@ -355,6 +356,7 @@
 					}else{
 						return array();
 					}
+					 2023-04-03 */
 					
 				}
 			}
@@ -917,7 +919,8 @@
 			if(count($this->RecordArray)>0){
 				foreach($this->RecordArray as $key => $value){
 					
-					$query= "UPDATE $this->Table SET $this->WhatToChange='$this->WhatToChangeTo' WHERE $this->Target='$value'";
+					//$query= "UPDATE $this->Table SET $this->WhatToChange='$this->WhatToChangeTo' WHERE $this->Target='$value'";
+					$query= "UPDATE $this->Table SET $this->WhatToChange='$value' WHERE $this->Target='$key'";
 					
 					$result = $this->r->rawQuery($query);
 					
@@ -926,8 +929,9 @@
 				//print_r($this->MultiArray);
 				foreach($this->MultiArray as $key => $value){
 					
-					$query= "UPDATE $this->Table SET $this->WhatToChange='$this->WhatToChangeTo' WHERE $this->Target='$value'";
-					
+					//$query= "UPDATE $this->Table SET $this->WhatToChange='$this->WhatToChangeTo' WHERE $this->Target='$value'";
+					$query= "UPDATE $this->Table SET $this->WhatToChange='$value' WHERE $this->Target='$key'";
+					//print $query;
 					$result = $this->r->rawQuery($query);
 				}
 			}else{
@@ -1226,6 +1230,7 @@
 				if($this->FirstRun){
 					$First=true;
 					$this->GetNextID();
+					//print_r($this->SkipArray);
 					foreach($this->PostArray as $key => $value){
 						//echo"key=$key -value=$value<br>";
 						if((!in_array($key,$this->SkipArray))&&(in_array($key,$this->ValidArray))){
@@ -1376,6 +1381,7 @@
 					//echo"123456-----------------------------------------------------------------------------\n";
 				}
 				//echo"1234567-----------------------------------------------------------------------------\n";
+				$result=false;
 				if($this->AutoIncVal>0){
 					$this->SQL="$this->InsertType INTO $this->Table ($this->SQLFields,$this->AutoIncrement) VALUES ($this->SQLData,$this->AutoIncVal)";
 					//echo"1234567711------------------------------------".$this->SQL."-----------------------------------------\n";
@@ -1383,6 +1389,8 @@
 					$this->SQL="$this->InsertType INTO $this->Table ($this->SQLFields) VALUES ($this->SQLData)";
 				}
 				$result = $this->r->rawQuery($this->SQL);
+
+				echo"123456778------------------------------------".$this->SQL."-----------------------------------------\n";
 				if(!$result){
 					//echo"error-$this->SQL"; 
 				}else{
@@ -1986,6 +1994,7 @@
 		//public function Initialise_Remote_Server($original=false){
 			//echo"\n\n-1234------Remote_Server--------------|--".var_export($server_login,true)."--|-----------------------------------\n";
 			//print_r($server_login);
+			/* 2023-04-03
 			if($original){
 				$this->current_server_tag=$this->original_server_tag;
 			}else{
@@ -1995,13 +2004,14 @@
 					$remote_server[$server_key]=$server_login[$server_key];
 					$this->server_login[$server_key]=$remote_server[$server_key];
 					$this->current_server_tag=$server_key;
-				}*/
+				}*//*
 				//print_r($this->server_login);
 				$server_key=$this->server_login['server_tag'];
 				$remote_server[$server_key]=$this->server_login;
 				$this->server_login[$server_key]=$remote_server[$server_key];
 				$this->current_server_tag=$server_key;
 			}
+			 2023-04-03 */
 			
 			//exit("Initialise_Remote_Server");
 		}

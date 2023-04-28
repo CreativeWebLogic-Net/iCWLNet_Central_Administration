@@ -23,9 +23,9 @@
 	}
 	if(isset($_POST['Sort'])){
 		if($_POST['Sort']){
-			print_r($_POST);
+			//print_r($_POST);
 			if(is_array($_POST['SFiles'])){
-        $r->Set_Current_Server($app_data['remote_server']['domain_name']);
+        //$r->Set_Current_Server($app_data['remote_server']['domain_name']);
 				$m= new BulkDBChange();
         $m->Set_Database($r);
 				$m->AddIDMultiArray($_POST['SFiles']);
@@ -146,7 +146,23 @@ function YY_checkform() { //v4.71
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td><form action="modify.php"  method="post" name="form2" >
+          <td>
+            <?php
+            //print_r($app_data['current_domain']);
+            if(is_array($app_data['current_domain'])){
+              if($app_data['current_domain']['mirrorID']>0){
+                //echo"Current Domain is a mirror";
+                $show=false;
+                $error_message="Mirror Domain No Pages";
+              }else{
+                $show=true;
+              }
+            }else{
+              $show=false;
+              $error_message="No Pages -> Add Domain";
+            }
+            ?>
+            <form action="modify.php"  method="post" name="form2" >
               <span class="pageheading">Modify / Delete Pages </span><span class="RedText"><?php print $Message; ?></span><br>
               <br>
               <table width="100%" border="0" cellpadding="3" cellspacing="1" id="table">
@@ -165,7 +181,8 @@ function YY_checkform() { //v4.71
 						//print $sql;
 						$sq2=$r->rawQuery($sql);  
             $nrows=$r->NumRows();
-            if($nrows>0){
+            if($show){
+              if($nrows>0){
                 while ($myrow = $r->Fetch_Array($sq2)) {
                   ?>
                       <tr class="<?php print(($Count%2)==0 ? "row1" : "row2"); ?>">
@@ -182,6 +199,15 @@ function YY_checkform() { //v4.71
                     $Count++;
                   };
               }
+            }else{
+              ?>
+                <tr class="row1">
+                        <td colspan="6"><?php print $error_message; ?></td>
+                        
+                      </tr>
+              <?php
+            }
+            
 						
 					?>
                 <tr align="right" bgcolor="#B2C8D8">
@@ -192,7 +218,10 @@ function YY_checkform() { //v4.71
             <strong><br>
               To Delete a Page:</strong> select the checkbox for that Page and then choose Delete button. <br>
             <strong>Tip:</strong> You can select multiple Pages. <br>
-          </form></td>
+          </form>
+        
+              
+        </td>
         </tr>
       </table></td>
   </tr>

@@ -11,7 +11,7 @@
     //echo"23322332----------------------------||-------------------------------------------------\n\n";
   }
   //echo"0002----------------------------||-------------------------------------------------\n\n";
-	
+	//print_r($_SESSION);
 	
 	$login=false;
 	
@@ -38,10 +38,10 @@
 	if($login){
     //echo"\n\n0000----------------------------||-------------------------------------------------\n\n";
 		$data=$r->rawQuery($sql);
-   // print_r($data);
+    //print_r($data);
     //echo"\n\n0001----------------------------||-------------------------------------------------\n\n";
 		//$dataarray=$r->Fetch_Array($data);
-    $dataarray=$r->Fetch_Array();
+    $dataarray=$r->Fetch_Array($data);
 		//print_r($dataarray);
     //echo"\n\n0002----------------------------||-------------------------------------------------\n\n";
 	
@@ -55,7 +55,8 @@
 
 				$_SESSION['original_clientsID']=$_SESSION["clientsID"];//$dataarray[2];
 				$_SESSION['original_administratorsID']=$_SESSION["administratorsID"];//$dataarray[0];
-				
+				//echo"\n\n0002----------------------------||-------------------------------------------------\n\n";
+		   // print_r($_SESSION);
 				//$r=new ReturnRecord();
 				if($_SESSION["SU"]=="CWL"){
 					$sql="SELECT MIN( domains.id) FROM domains WHERE  clientsID=".$_SESSION['clientsID'];
@@ -64,7 +65,7 @@
 					$sql.=" AND administratorsID=$_SESSION[administratorsID] AND clientsID=$_SESSION[clientsID]";
 				}
 				
-				print $sql;
+				//print "-\n\n-".$sql."-\n\n-";
 				$rslt=$r->RawQuery($sql);
 				if($rslt){
 					if($r->NumRows($rslt)>0){
@@ -76,9 +77,11 @@
 						}
 					}
 				}
+        //echo"\n\n0003----------------------------||-------------------------------------------------\n\n";
+        //print_r($_SESSION);
 				//exit();
 				$loc="Location: main/logged-in/index.php";
-				//header($loc);
+				header($loc);
 				//print $loc;
 			}else{	//admin login bad
 				$Message="Incorrect Username or Password";
@@ -91,7 +94,8 @@
 		}
 
 	}
-	
+  //echo"\n\n0004----------------------------||-------------------------------------------------\n\n";
+	//print_r($_SESSION);
 
 ?><html>
 <head>
@@ -270,4 +274,7 @@ function YY_checkform() { //v4.71
 </html>
 <?php 
   include("./main/includes/end-of-file.php");
+
+  //echo"000231----------------------------||-------------------------------------------------\n\n";
+	//print_r($_SESSION);
 ?>

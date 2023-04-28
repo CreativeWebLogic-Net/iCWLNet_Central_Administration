@@ -1,3 +1,6 @@
+<?php
+	//print_r($app_data['domains']);
+?>
 <div id="ManagementHeader">
 	
 	<div id="ManagementHeaderRightColumn">
@@ -72,17 +75,29 @@
 					$selected_key=$_SESSION['original_domainsID'];
 					$drop_array=$app_data['domains'];
 					foreach($drop_array as $key=>$val){
-						foreach($val as $key2=>$val2){
-							$tmp=($key2==$selected_key ? "selected" : "");
-							echo"<option value='".$key2."' ".$tmp.">".$val2."</option>";
-						}
+						//print_r($val);
+						//foreach($val as $key2=>$val2){
+							
+							//$tmp=($val['id']==$selected_key ? "selected" : "");
+							if($val['id']==$selected_key){
+								$tmp="selected";
+								$app_data['current_domain']=$app_data['domains'][$key];
+							}else{
+								$tmp="";
+							}
+							echo"<option value='".$val['id']."' ".$tmp.">".$val['title']."</option>";
+						//}
 					}
 					print "</select></form>";
 				}elseif(count($app_data['domains'])==1){
 					$drop_array=$app_data['domains'][0];
-					foreach($drop_array as $key=>$val){
-						print('<span class="whitetextbold">Website: '.$val.'</span>');
-					}
+					$app_data['current_domain']=$app_data['domains'][0];
+					//foreach($drop_array as $key=>$val){
+						print('<span class="whitetextbold">Website: '.$app_data['domains'][0]['title'].'</span>');
+					//}
+				}else{
+					print('<span class="whitetextbold">No Website: Add one now</span>');
+					$app_data['current_domain']=false;
 				}
 				
 			?>

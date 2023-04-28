@@ -3,7 +3,7 @@
   //echo "-000----------------------------------------------------------------------------";
   
 	//$r->Set_Current_Server($app_data['remote_server']['domain_name']);
-  $r->Initialise_Remote_Server(true);
+  //$r->Initialise_Remote_Server(true);
   //print_r($_GET);
 	$id=false;
   $remote_domain_name=$app_data['remote_server']['domain_name'];
@@ -21,7 +21,7 @@
     $Domain_Name=$app_data['remote_server']['domain_name'];
     //print $Domain_Name;
     
-    $r->Initialise_Remote_Server(true);
+    //$r->Initialise_Remote_Server(true);
     //$r->Set_Current_Server($Domain_Name);
     $sql="SELECT COUNT(*) FROM domains WHERE id=$id AND clientsID=".$_SESSION['original_clientsID'];
     
@@ -45,7 +45,7 @@
 	if(isset($_POST['Submit'])){
 		if($_POST['Submit']){
       //---update sitemanage--------------------------------------------------------------------------";
-      $r->Initialise_Remote_Server(true);
+      //$r->Initialise_Remote_Server(true);
 			$m= new UpdateDatabase($log);
       $m->Set_Database($r);
 			$m->AddPosts($_POST,$_FILES);
@@ -65,6 +65,7 @@
 			$_SESSION['ModsPermArr']=GetModulesPermissions();
 
       //------get remote domain info-----------------------------------------------------------------------------------------------------	
+      /*
       $r->Set_Current_Server($Domain_Name);
       $sql="SELECT id AS domainsID,Name AS Host,serversID FROM domains WHERE Name='".$Domain_Name."'";
       $rslt=$r->rawQuery($sql);
@@ -73,9 +74,10 @@
         $data=$r->Fetch_Assoc();
         $app_data['edit_domain']=$data;
       }
+      */
       //---update remote server--------------------------------------------------------------------------";
       
-      
+      /*
       $m= new UpdateDatabase($log);
       $m->Set_Database($r);
       $m->Set_Remote_Database($Domain_Name);
@@ -92,16 +94,17 @@
 				}
 			}
 			$Message="Website Updated";
+      */
 		};
 	};
   
 	//---retrieve remote server domain variables to edit--------------------------------------------------------------------------";
   //$Domain_Name=$app_data['remote_server']['domain_name'];
-  $r->Initialise_Remote_Server(true);
+  //$r->Initialise_Remote_Server(true);
   $r->AddTable("domains");
 	$r->AddSearchVar($id);
 	$Insert=$r->GetRecord();
-  print_r($Insert);
+  //print_r($Insert);
 	$ModsArr=array();
 	$rslt=$r->RawQuery("SELECT modulesID FROM domains_modules WHERE domainsID=$id");
 	while($myrow=$r->Fetch_Array($rslt)){
@@ -242,7 +245,7 @@ function YY_checkform() { //v4.71
                 <td><select name="mirrorID" id="mirrorID">
                 
                   <?php
-                  print_r($Insert);
+                  //print_r($Insert);
                     $tmp=(0==$Insert['mirrorID'] ? "selected" : "");
                     $output="<option value='0' ".$tmp.">No Mirror</option>";
                     print $output;

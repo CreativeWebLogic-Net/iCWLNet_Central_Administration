@@ -241,12 +241,7 @@ function YY_checkform() { //v4.71
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td valign="top">
-          <?php
-            if(is_array($app_data['current_domain'])){
-              if($app_data['current_domain']['mirrorID']==0){
-          ?>
-          <form action="index.php"  method="post" name="form2" onSubmit="YY_checkform('form2','FirstName','#q','0','You must fill in the field Name.','Email','S','2','You must fill in a valid Email Address.','UserName','#q','0','You must fill in the field Username.','Password','#q','0','You must fill in the field Password','Password2','#Password','6','Passwords must match.');return document.MM_returnValue" >
+          <td valign="top"><form action="index.php"  method="post" name="form2" onSubmit="YY_checkform('form2','FirstName','#q','0','You must fill in the field Name.','Email','S','2','You must fill in a valid Email Address.','UserName','#q','0','You must fill in the field Username.','Password','#q','0','You must fill in the field Password','Password2','#Password','6','Passwords must match.');return document.MM_returnValue" >
               <span class="pageheading">Add New Page </span><span class="RedText"><?php print $Message; ?></span><br>
               <br>
             Complete the page details below.<br>
@@ -332,19 +327,23 @@ function YY_checkform() { //v4.71
               <tr>
                 <td colspan="2" align="center"><textarea name="content_text" cols="120" rows="20" id="content_text"></textarea></td>
                 </tr>
-                
+                <tr id="SidebarRow1">
+                <td colspan="2" align="left"><strong>Side Bar : 
+                  <select name="sidebar_module_viewsID" id="sidebar_module_viewsID" onChange="Set_SideBar_Code()">
+                    <option value="0" selected>No Side Bar</option>
+                    <option value="32">News List Widget</option>
+                    <option value="11">Text Widget</option>
+                  </select>
+                </strong></td>
+              </tr>
+              <tr id="SidebarRow2">
+                <td colspan="2" align="center"><textarea name="content_text_sidebar" cols="120" rows="20" id="content_text_sidebar"></textarea></td>
+              </tr>
             </table>
             <p><br>
               <input name="Submit" type="submit"  class="formbuttons" id="Submit" value="Save" onClick="return confirmSubmit()">
               </p>
-            </form>
-          <?php
-              }else{
-                print "Currently Selected Domain is Mirroring another Domain, You cannot Add A Page to it without setting Domain Mirror to 'No Mirror'";
-              }
-            }
-          ?>
-          </td>
+            </form></td>
         </tr>
       </table></td>
   </tr>

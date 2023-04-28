@@ -1,8 +1,11 @@
 <?php
-	
+//session_start();
+	//echo"\n\n0005----------------------------||-------------------------------------------------\n\n";
+//	print_r($_SESSION);
 	
 	include("../../Admin_Start_Include.php");
-	
+	//echo"\n\n0006----------------------------||-------------------------------------------------\n\n";
+	//print_r($_SESSION);
 	$log->general('logged in admin',1);
 	$flag=false;
 	
